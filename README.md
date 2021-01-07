@@ -3,9 +3,9 @@ A repository of instructions and scripts specific to the University of Virginia 
 
 ## Instructions for UVA Rivanna
 
-These instructions are taken from the [LDMX wiki](https://ldmx-software.github.io) and adapted to the UVA Rivanna computers.
+These instructions are taken from the [LDMX wiki](https://ldmx-software.github.io) and adapted to the UVA Rivanna computers. The first steps are to clone the ldmx-sw and ldmx-analysis repositories and then setup the container which contains the complete environment needed for LDMX software.
 
-## ldmx-sw
+### ldmx-sw
 
 Operating ldmx-sw in the container (which contains all the correct versions of the required software) is the simplest and cleanest way to build and run the LDMX software. ldmx-sw uses a Docker image, but this requires sudo privileges on Rivanna. However, docker images can be downloaded and converted using singularity. First, make sure you are operating in a bash terminal and then type
 
@@ -27,7 +27,7 @@ Next, source the ldmx-env.sh script. This will grab the latest docker image and 
 source ldmx-sw/scripts/ldmx-env.sh
 ```
 
-Now you can work inside the container by starting all commands with ldmx. Next, build ldmx-sw.
+Now you can work inside the container by starting all commands with ```ldmx```. Next, build ldmx-sw.
 
 ```bash
 cd ldmx-sw; mkdir build; cd build;
@@ -37,7 +37,7 @@ ldmx make install
 
 You will have to re-build every time a change is made to ldmx-sw. Now you can run with the ```ldmx fire``` command where ```ldmx``` operates inside the container and ```fire``` is the ldmx-sw specific command that executes the python configuration files. There are several examples on the LDMX wiki.
 
-## ldmx-analysis
+### ldmx-analysis
 
 Sometimes, you may want to make changes to the LDMX software or simply perform analysis without changing the core code in ldmx-sw. For this, it is recommended that you use ldmx-analysis. This also enables a faster build if these changes can be made within ldmx-analysis. ldmx-analysis is intended to be built and run alongside ldmx-sw.
 
