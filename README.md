@@ -1,10 +1,9 @@
 # uva-ldmx
-A repository of instructions and script specific to the University of Virginia LDMX group.
+A repository of instructions and scripts specific to the University of Virginia LDMX group.
 
-Instructions for UVA Rivanna
+## Instructions for UVA Rivanna
 
-These instructions are taken from the LDMX wiki and adapted to the UVA Rivanna computers.
-https://ldmx-software.github.io
+These instructions are taken from the [LDMX wiki](https://ldmx-software.github.io) and adapted to the UVA Rivanna computers.
 
 ## ldmx-sw
 
@@ -36,7 +35,7 @@ ldmx cmake ..
 ldmx make install
 ```
 
-You will have to re-build every time a change is made to ldmx-sw. Now you can run with the ```bash ldmx fire``` command where ldmx operates inside the container and fire is the ldmx-sw specific command that executes the python configuration files. Try one of the examples on the LDMX wiki to see if it works.
+You will have to re-build every time a change is made to ldmx-sw. Now you can run with the ```ldmx fire``` command where ```ldmx``` operates inside the container and ```fire``` is the ldmx-sw specific command that executes the python configuration files. There are several examples on the LDMX wiki.
 
 ## ldmx-analysis
 
@@ -58,4 +57,4 @@ ldmx cmake ..
 ldmx make install
 ```
 
-You can run ldmx-analysis in the same way as running ldmx-sw with the ldmx fire command followed by a python configuration script. Try one of the ldmx-analysis examples in the config directory.
+You can run ldmx-analysis in the same way as running ldmx-sw with the ```ldmx fire``` command followed by a python configuration script. There are several examples in the config directory.
