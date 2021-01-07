@@ -6,7 +6,7 @@ Instructions for UVA Rivanna
 These instructions are taken from the LDMX wiki and adapted to the UVA Rivanna computers.
 https://ldmx-software.github.io
 
-ldmx-sw
+## ldmx-sw
 
 Operating ldmx-sw in the container (which contains all the correct versions of the required software) is the simplest and cleanest way to build and run the LDMX software. ldmx-sw uses a Docker image, but this requires sudo privileges on Rivanna. However, docker images can be downloaded and converted using singularity. First, make sure you are operating in a bash terminal and then type
 
@@ -36,7 +36,9 @@ ldmx cmake ..
 ldmx make install
 ```
 
-You will have to re-build every time a change is made to ldmx-sw. Now you can run with the ldmx fire command where ldmx operates inside the container and fire is the ldmx-sw specific command that executes the python configuration files. Try one of the examples on the LDMX wiki to see if it works.ldmx-analysis
+You will have to re-build every time a change is made to ldmx-sw. Now you can run with the ```bash ldmx fire``` command where ldmx operates inside the container and fire is the ldmx-sw specific command that executes the python configuration files. Try one of the examples on the LDMX wiki to see if it works.
+
+## ldmx-analysis
 
 Sometimes, you may want to make changes to the LDMX software or simply perform analysis without changing the core code in ldmx-sw. For this, it is recommended that you use ldmx-analysis. This also enables a faster build if these changes can be made within ldmx-analysis. ldmx-analysis is intended to be built and run alongside ldmx-sw.
 
