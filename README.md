@@ -34,7 +34,7 @@ You will have to re-build every time a change is made to ldmx-sw. Now you can ru
 
 Sometimes, you may want to make changes to the LDMX software or simply perform analysis without changing the core code in ldmx-sw. For this, it is recommended that you use ldmx-analysis. This also enables a faster build if these changes can be made within ldmx-analysis. ldmx-analysis is intended to be built and run alongside ldmx-sw.
 
-You first need to get access to the ldmx-analysis repository. For access, email Omar Moreno at omoreno@slac.stanford.edu with your Github account info. Then, clone the repository.
+You first need to get access to the ldmx-analysis repository. For access, email Omar Moreno at SLAC with your Github account info. Then, clone the repository.
 
 	git clone --recursive https://github.com/LDMX-Software/ldmx-analysis.git
 
@@ -44,7 +44,7 @@ Before building ldmx-analysis, ldmx-sw needs to be built following the instructi
 
 	cd ldmx-analysis; mkdir build; cd build;
 
-	ldmx cmake -DLDMXSW_INSTALL_PREFX=$LDMX_BASE/ldmx-sw/install -DCMAKE_INSTALL_PREFIX=$LDMX_BASE/ldmx-sw/install ..
+	ldmx cmake ..
 
 	ldmx make install
 
