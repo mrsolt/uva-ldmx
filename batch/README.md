@@ -1,60 +1,32 @@
-# uva-ldmx
-A repository of instructions and scripts specific to the University of Virginia LDMX group.
+# SLURM Batch System
+Rivanna uses the SLURM batch system. The instructions here are specific to the LDMX framework, and more general instructions can be found on the Rivanna [SLURM Job Manager](https://www.rc.virginia.edu/userinfo/rivanna/slurm/).
 
-## Instructions for UVA Rivanna
-
-These instructions are taken from the [LDMX wiki](https://ldmx-software.github.io) and adapted to the UVA Rivanna computers.
-
-## ldmx-sw
-
-Operating ldmx-sw in the container (which contains all the correct versions of the required software) is the simplest and cleanest way to build and run the LDMX software. ldmx-sw uses a Docker image, but this requires sudo privileges on Rivanna. However, docker images can be downloaded and converted using singularity. First, make sure you are operating in a bash terminal and then type
+An example is shown in template.slurm where you would replace ```<config file>``` with the config file of your choice. Note for the SLURM batch system, you must pass the entire environment through the job submission script since it does not pass either the environment you are currently working in or your bashrc. Since you are working inside the container, you can simply source the ldmx-env.sh script in you job submission script.
 
 ```bash
-module load singularity/3.6.1
+source "$LDMX_BASE/ldmx-sw/scripts/ldmx-env.sh"
 ```
 
-If you will be a frequent user, you should add the singularity module to your bash rc. Next, clone the ldmx-sw repository.
+In addition, make sure to source the ldmx-env.sh script before job submission in order to properly set the ```LDMX_BASE``` path. In order to submit a job, simply use the ```sbatch``` command.
 
 ```bash
-git clone --recursive https://github.com/LDMX-Software/ldmx-sw.git
+sbatch <slurm file>
 ```
 
-Note: the recursive flag is important because there are several necessary parts stored in separate git repositories.
+## Other Useful Commands
 
-Next, source the ldmx-env.sh script. This will grab the latest docker image and enable you to work inside the container. This may take a few minutes for the first time (and will create a .sif file), but also must be re-run every time a new terminal is opened.
-
+To check the status of your jobs:
 ```bash
-source ldmx-sw/scripts/ldmx-env.sh
+squeue -u <computing id>
 ```
 
-Now you can work inside the container by starting all commands with ldmx. Next, build ldmx-sw.
-
+To cancel a job:
 ```bash
-cd ldmx-sw; mkdir build; cd build;
-ldmx cmake ..
-ldmx make install
+scancel <job id>
 ```
 
-You will have to re-build every time a change is made to ldmx-sw. Now you can run with the ```ldmx fire``` command where ```ldmx``` operates inside the container and ```fire``` is the ldmx-sw specific command that executes the python configuration files. There are several examples on the LDMX wiki.
-
-## ldmx-analysis
-
-Sometimes, you may want to make changes to the LDMX software or simply perform analysis without changing the core code in ldmx-sw. For this, it is recommended that you use ldmx-analysis. This also enables a faster build if these changes can be made within ldmx-analysis. ldmx-analysis is intended to be built and run alongside ldmx-sw.
-
-You first need to get access to the ldmx-analysis repository. For access, email Omar Moreno at SLAC with your Github account info. Then, clone the repository.
-
+To incorporate job arrays:
 ```bash
-git clone --recursive https://github.com/LDMX-Software/ldmx-analysis.git
+sbatch --array=<array>
 ```
-
-Note: the recursive flag is important because there are several necessary parts stored in separate git repositories.
-
-Before building ldmx-analysis, ldmx-sw needs to be built following the instructions above. Build ldmx-analysis inside the container.
-
-```bash
-cd ldmx-analysis; mkdir build; cd build;
-ldmx cmake ..
-ldmx make install
-```
-
-You can run ldmx-analysis in the same way as running ldmx-sw with the ```ldmx fire``` command followed by a python configuration script. There are several examples in the config directory.
+```<array>``` would be the desired array. For instance, you would input 1-100 to pass integers 1 through 100, inclusively. In the .slurm file where you would want to pass the integer from the array, you would add ```%a``` in the SBATCH lines and ```${SLURM_ARRAY_TASK_ID}``` in the command lines.
