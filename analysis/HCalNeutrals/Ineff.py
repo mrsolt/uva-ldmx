@@ -78,21 +78,21 @@ for i in range(h.GetNbinsX()):
 for i in range(h2.GetNbinsX()):
     n = histo2.Integral(1,i)
     ineff = 1 - n / float(nevents2)
-    err = np.sqrt(n)/nevents
+    err = np.sqrt(n)/nevents2
     h2.SetBinContent(i, ineff)
     h2.SetBinError(i, err)
     
 for i in range(h3.GetNbinsX()):
     n = histo3.Integral(1,i)
     ineff = 1 - n / float(nevents3)
-    err = np.sqrt(n)/nevents
+    err = np.sqrt(n)/nevents3
     h3.SetBinContent(i, ineff)
     h3.SetBinError(i, err)
     
 for i in range(h4.GetNbinsX()):
     n = histo4.Integral(1,i)
     ineff = 1 - n / float(nevents4)
-    err = np.sqrt(n)/nevents
+    err = np.sqrt(n)/nevents4
     h4.SetBinContent(i, ineff)
     h4.SetBinError(i, err)
     
@@ -129,6 +129,7 @@ h.SetLineColor(1)
 h2.SetLineColor(2)
 h3.SetLineColor(4)
 h4.SetLineColor(6)
+h.GetYaxis().SetRangeUser(0.0000005, 1)
 h.Draw()
 h.SetTitle("Inefficiency at Min Z {0}".format(label))
 h.GetXaxis().SetTitle("#lambda")
