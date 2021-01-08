@@ -4,9 +4,10 @@ from LDMX.SimCore import simulator
 import sys
 
 p=ldmxcfg.Process("egsim")
+p.run = int(sys.argv[1])
 sim = simulator.simulator( "kaon" )
 sim.setDetector( "ldmx-det-v12" )
-sim.runNumber = sys.argv[1]
+sim.runNumber = int(sys.argv[1])
 sim.description = "Kaon fired from upstream of the HCal"
 
 kaon_gun = generators.gun('kaon_gun')

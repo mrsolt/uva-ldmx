@@ -1,8 +1,8 @@
-# Configuration Files
-Both ldmx-sw and ldmx-analysis are run by using python configuration files. To run a config file use the ```ldmx``` command to operate inside the container and the ```fire``` command. For example, 
+# HCal Neutral Analysis Files
+The ineff.py script plots the inefficiency as a function of radiation length in the HCal.
 
 ```bash
-ldmx fire <config file> <options>
+python ineff.py -l <label> <outfile base name> <input file 1> <input file 2> <input file 3>
 ```
 
-Details of config files can be found on the [LDMX wiki](https://ldmx-software.github.io).
+TODO: Cleanup the ineff.py script because it is messy and not very flexible.

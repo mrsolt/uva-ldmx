@@ -4,9 +4,10 @@ from LDMX.SimCore import simulator
 import sys
 
 p=ldmxcfg.Process("egsim")
+p.run = int(sys.argv[1])
 sim = simulator.simulator( "neutron" )
 sim.setDetector( "ldmx-det-v12" )
-sim.runNumber = sys.argv[1]
+sim.runNumber = int(sys.argv[1])
 sim.description = "Neutron fired from upstream of the HCal"
 
 neutron_gun = generators.gun('neutron_gun')
