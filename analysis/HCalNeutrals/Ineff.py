@@ -10,6 +10,7 @@ import sys
 tmpargv = sys.argv
 sys.argv = []
 import getopt
+import numpy as np
 import ROOT
 from ROOT import gROOT, TFile, TTree, TChain, gDirectory, TLine, gStyle, TCanvas, TLegend, TH1F, TLatex
 sys.argv = tmpargv
@@ -48,6 +49,7 @@ outfileroot = TFile(remainder[0]+".root","RECREATE")
 infile = TFile(remainder[1])
 infile2 = TFile(remainder[2])
 infile3 = TFile(remainder[3])
+infile4 = TFile(remainder[4])
 
 histo = infile.Get("myana/myana_lambda_min")
 nevents = histo.GetEntries()
@@ -58,63 +60,82 @@ nevents2 = histo2.GetEntries()
 histo3 = infile3.Get("myana/myana_lambda_min")
 nevents3 = histo3.GetEntries()
 
+histo4 = infile4.Get("myana/myana_lambda_min")
+nevents4 = histo4.GetEntries()
+
 h = TH1F("h", "h", histo.GetNbinsX(), histo.GetXaxis().GetBinLowEdge(1), histo.GetXaxis().GetBinUpEdge(histo.GetNbinsX()))
 h2 = TH1F("h2", "h2", histo2.GetNbinsX(), histo2.GetXaxis().GetBinLowEdge(1), histo2.GetXaxis().GetBinUpEdge(histo2.GetNbinsX()))
 h3 = TH1F("h3", "h3", histo3.GetNbinsX(), histo3.GetXaxis().GetBinLowEdge(1), histo3.GetXaxis().GetBinUpEdge(histo3.GetNbinsX()))
+h4 = TH1F("h4", "h4", histo4.GetNbinsX(), histo4.GetXaxis().GetBinLowEdge(1), histo4.GetXaxis().GetBinUpEdge(histo4.GetNbinsX()))
 
 for i in range(h.GetNbinsX()):
     n = histo.Integral(1,i)
     ineff = 1 - n / float(nevents)
+    err = np.sqrt(n)/nevents
     h.SetBinContent(i, ineff)
+    h.SetBinError(i, err)
     
 for i in range(h2.GetNbinsX()):
     n = histo2.Integral(1,i)
     ineff = 1 - n / float(nevents2)
+    err = np.sqrt(n)/nevents
     h2.SetBinContent(i, ineff)
+    h2.SetBinError(i, err)
     
 for i in range(h3.GetNbinsX()):
     n = histo3.Integral(1,i)
     ineff = 1 - n / float(nevents3)
+    err = np.sqrt(n)/nevents
     h3.SetBinContent(i, ineff)
+    h3.SetBinError(i, err)
     
-histo4 = infile.Get("myana/myana_lambda_max")
-nevents4 = histo4.GetEntries()
-
-histo5 = infile2.Get("myana/myana_lambda_max")
-nevents5 = histo5.GetEntries()
-
-histo6 = infile3.Get("myana/myana_lambda_max")
-nevents6 = histo6.GetEntries()
-
-h4 = TH1F("h4", "h4", histo4.GetNbinsX(), histo4.GetXaxis().GetBinLowEdge(1), histo4.GetXaxis().GetBinUpEdge(histo4.GetNbinsX()))
-h5 = TH1F("h5", "h5", histo5.GetNbinsX(), histo5.GetXaxis().GetBinLowEdge(1), histo5.GetXaxis().GetBinUpEdge(histo5.GetNbinsX()))
-h6 = TH1F("h6", "h6", histo6.GetNbinsX(), histo6.GetXaxis().GetBinLowEdge(1), histo6.GetXaxis().GetBinUpEdge(histo6.GetNbinsX()))
-
 for i in range(h4.GetNbinsX()):
     n = histo4.Integral(1,i)
     ineff = 1 - n / float(nevents4)
+    err = np.sqrt(n)/nevents
     h4.SetBinContent(i, ineff)
+    h4.SetBinError(i, err)
     
-for i in range(h5.GetNbinsX()):
-    n = histo5.Integral(1,i)
-    ineff = 1 - n / float(nevents5)
-    h5.SetBinContent(i, ineff)
+#histo4 = infile.Get("myana/myana_lambda_max")
+#nevents4 = histo4.GetEntries()
+
+#histo5 = infile2.Get("myana/myana_lambda_max")
+#nevents5 = histo5.GetEntries()
+
+#histo6 = infile3.Get("myana/myana_lambda_max")
+#nevents6 = histo6.GetEntries()
+
+#h4 = TH1F("h4", "h4", histo4.GetNbinsX(), histo4.GetXaxis().GetBinLowEdge(1), histo4.GetXaxis().GetBinUpEdge(histo4.GetNbinsX()))
+#h5 = TH1F("h5", "h5", histo5.GetNbinsX(), histo5.GetXaxis().GetBinLowEdge(1), histo5.GetXaxis().GetBinUpEdge(histo5.GetNbinsX()))
+#h6 = TH1F("h6", "h6", histo6.GetNbinsX(), histo6.GetXaxis().GetBinLowEdge(1), histo6.GetXaxis().GetBinUpEdge(histo6.GetNbinsX()))
+
+#for i in range(h4.GetNbinsX()):
+#    n = histo4.Integral(1,i)
+#    ineff = 1 - n / float(nevents4)
+#    h4.SetBinContent(i, ineff)
     
-for i in range(h6.GetNbinsX()):
-    n = histo6.Integral(1,i)
-    ineff = 1 - n / float(nevents6)
-    h6.SetBinContent(i, ineff)
+#for i in range(h5.GetNbinsX()):
+#    n = histo5.Integral(1,i)
+#    ineff = 1 - n / float(nevents5)
+#    h5.SetBinContent(i, ineff)
+    
+#for i in range(h6.GetNbinsX()):
+#    n = histo6.Integral(1,i)
+#    ineff = 1 - n / float(nevents6)
+#    h6.SetBinContent(i, ineff)
     
 openPDF(outfile,c)
 h.SetLineColor(1)
 h2.SetLineColor(2)
 h3.SetLineColor(4)
+h4.SetLineColor(6)
 h.Draw()
 h.SetTitle("Inefficiency at Min Z {0}".format(label))
 h.GetXaxis().SetTitle("#lambda")
 h.GetYaxis().SetTitle("Inefficiency")
 h2.Draw("same")
 h3.Draw("same")
+h4.Draw("same")
 legend = TLegend(.58,.66,.92,.87)
 legend.SetBorderSize(0)
 legend.SetFillColor(0)
@@ -124,20 +145,21 @@ legend.SetTextSize(0.035)
 legend.AddEntry(h,"10.2","LP")
 legend.AddEntry(h2,"10.3","LP")
 legend.AddEntry(h3,"10.5","LP")
+legend.AddEntry(h4,"10.7","LP")
 legend.Draw()
 c.SetLogy(1)
 c.Print(outfile+".pdf")
 
-h4.SetLineColor(1)
-h5.SetLineColor(2)
-h6.SetLineColor(4)
-h4.Draw()
-h4.SetTitle("Inefficiency at Max Z {0}".format(label))
-h4.GetXaxis().SetTitle("#lambda")
-h4.GetYaxis().SetTitle("Inefficiency")
-h5.Draw("same")
-h6.Draw("same")
-legend.Draw()
-c.Print(outfile+".pdf")
+#h4.SetLineColor(1)
+#h5.SetLineColor(2)
+#h6.SetLineColor(4)
+#h4.Draw()
+#h4.SetTitle("Inefficiency at Max Z {0}".format(label))
+#h4.GetXaxis().SetTitle("#lambda")
+#h4.GetYaxis().SetTitle("Inefficiency")
+#h5.Draw("same")
+#h6.Draw("same")
+#legend.Draw()
+#c.Print(outfile+".pdf")
 
 closePDF(outfile,c)
