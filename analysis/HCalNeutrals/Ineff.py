@@ -69,28 +69,28 @@ h3 = TH1F("h3", "h3", histo3.GetNbinsX(), histo3.GetXaxis().GetBinLowEdge(1), hi
 h4 = TH1F("h4", "h4", histo4.GetNbinsX(), histo4.GetXaxis().GetBinLowEdge(1), histo4.GetXaxis().GetBinUpEdge(histo4.GetNbinsX()))
 
 for i in range(h.GetNbinsX()):
-    n = histo.Integral(0,i)
+    n = histo.Integral(1,i)
     ineff = 1 - n / float(nevents)
     err = np.sqrt(nevents - n)/nevents
     h.SetBinContent(i, ineff)
     h.SetBinError(i, err)
     
 for i in range(h2.GetNbinsX()):
-    n = histo2.Integral(0,i)
+    n = histo2.Integral(1,i)
     ineff = 1 - n / float(nevents2)
     err = np.sqrt(nevents2 - n)/nevents2
     h2.SetBinContent(i, ineff)
     h2.SetBinError(i, err)
     
 for i in range(h3.GetNbinsX()):
-    n = histo3.Integral(0,i)
+    n = histo3.Integral(1,i)
     ineff = 1 - n / float(nevents3)
     err = np.sqrt(nevents3 - n)/nevents3
     h3.SetBinContent(i, ineff)
     h3.SetBinError(i, err)
     
 for i in range(h4.GetNbinsX()):
-    n = histo4.Integral(0,i)
+    n = histo4.Integral(1,i)
     ineff = 1 - n / float(nevents4)
     err = np.sqrt(nevents4 - n)/nevents4
     h4.SetBinContent(i, ineff)
