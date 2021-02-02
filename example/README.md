@@ -3,8 +3,11 @@
 This example fires neutrons at the front face of the (back) Hcal, and creates a root file of histograms and a tuple of variables relevant to the Hcal. The final plot shows the inefficiency of neutron rejection as a function of Hcal depth in interaction lengths.
 
 Copy the following files to ldmx-analysis:
+
 cp python/HcalAnalyzer.py ldmx-analysis/python/
+
 cp src/HcalAnalyzer.cxx ldmx-analysis/src/Analysis/
+
 cp include/HcalAnalyzer.h ldmx-analysis/include/Analysis/
 
 TODO: put these files in the main ldmx-analysis branch so that they don't need to be copied.
