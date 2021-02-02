@@ -4,11 +4,17 @@ This example fires neutrons at the front face of the (back) Hcal, and creates a 
 
 Copy the following files to ldmx-analysis:
 
+```bash
 cp python/HcalAnalyzer.py ldmx-analysis/python/
+```
 
+```bash
 cp src/HcalAnalyzer.cxx ldmx-analysis/src/Analysis/
+```
 
+```bash
 cp include/HcalAnalyzer.h ldmx-analysis/include/Analysis/
+```
 
 TODO: put these files in the main ldmx-analysis branch so that they don't need to be copied.
 
