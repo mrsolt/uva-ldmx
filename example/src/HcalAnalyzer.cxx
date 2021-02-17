@@ -5,7 +5,7 @@
 
 namespace ldmx {
 
-    void HcalAnalyzer::configure(Parameters& ps) {
+    void HcalAnalyzer::configure(framework::config::Parameters& ps) {
 
         PEthresh_ = ps.getParameter<double>("PEthresh_"); //PE threshold for vetoing
         //These values are hard-coded for the v12 detector
@@ -16,7 +16,7 @@ namespace ldmx {
         return;
     }
 
-    void HcalAnalyzer::analyze(const Event& event) {
+    void HcalAnalyzer::analyze(const framework::Event& event) {
 
         //Grab the SimParticle Map
         auto particle_map{event.getMap<int, ldmx::SimParticle>("SimParticles")};
@@ -163,12 +163,12 @@ namespace ldmx {
         return;
     }
 
-    void HcalAnalyzer::onFileOpen(EventFile&) {
+    void HcalAnalyzer::onFileOpen(framework::EventFile&) {
 
         return;
     }
 
-    void HcalAnalyzer::onFileClose(EventFile&) {
+    void HcalAnalyzer::onFileClose(framework::EventFile&) {
 
         return;
     }

@@ -11,18 +11,18 @@ namespace ldmx {
      * @class HcalAnalyzer
      * @brief
      */
-    class HcalAnalyzer : public Analyzer {
+    class HcalAnalyzer : public framework::Analyzer {
         public:
 
-            HcalAnalyzer(const std::string& name, Process& process) : Analyzer(name, process) {}
+            HcalAnalyzer(const std::string& name, framework::Process& process) : Analyzer(name, process) {}
 
-            virtual void configure(Parameters& ps);
+            virtual void configure(framework::config::Parameters& ps);
 
-            virtual void analyze(const Event& event);
+            virtual void analyze(const framework::Event& event);
 
-            virtual void onFileOpen(EventFile&);
+            virtual void onFileOpen(framework::EventFile&);
 
-            virtual void onFileClose(EventFile&);
+            virtual void onFileClose(framework::EventFile&);
 
             virtual void onProcessStart();
 
