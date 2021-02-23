@@ -2,21 +2,17 @@
 
 This example fires neutrons at the front face of the (back) Hcal, and creates a root file of histograms and a tuple of variables relevant to the Hcal. The final plot shows the inefficiency of neutron rejection as a function of Hcal depth in interaction lengths.
 
-Copy the following files to ldmx-analysis:
+Checkout the uva-dev branch in ldmx-analysis:
 
 ```bash
-cp python/HcalAnalyzer.py ldmx-analysis/python/
+cd ldmx-analysis
 ```
 
 ```bash
-cp src/HcalAnalyzer.cxx ldmx-analysis/src/Analysis/
+git checkout uva-dev
 ```
 
-```bash
-cp include/HcalAnalyzer.h ldmx-analysis/include/Analysis/
-```
-
-TODO: put these files in the main ldmx-analysis branch so that they don't need to be copied.
+TODO: put these files in the main ldmx-analysis branch.
 
 See instructions on how to build ldmx-sw and ldmx-analysis on Rivanna in the home directory. You can run the following analysis by either using the config files directly or using the batch scripts (usually used for multiple jobs).
 
