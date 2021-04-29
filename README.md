@@ -58,3 +58,19 @@ ldmx make install
 ```
 
 You can run ldmx-analysis in the same way as running ldmx-sw with the ```ldmx fire``` command followed by a python configuration script. There are several examples in the config directory.
+
+### Troubleshooting
+
+Updates to the software, either on the main trunk or your local changes, can often lead to unexpected compiling errors. Performing a "total reset" of your branch in both ldmx-sw and ldmx-analysis can often fix the problem. To perform the reset, do the following commands:
+
+```bash
+cd ldmx-sw 
+git clean -xf 
+git submodule foreach git clean -xf
+rm -r build
+rm -r install
+mkdir build
+cd build
+ldmx cmake ..
+ldmx make install
+```
