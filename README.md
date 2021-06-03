@@ -59,6 +59,17 @@ ldmx make install
 
 You can run ldmx-analysis in the same way as running ldmx-sw with the ```ldmx fire``` command followed by a python configuration script. There are several examples in the config directory.
 
+### Updating Branches
+
+You will want to update your local repositories frequently to keep up with the rapid changes of ldmx-sw. You must both update the repository and the submodules. Make sure your changes are committed, then do:
+
+```bash
+git pull
+git submodule update
+```
+
+After the submodules are updated, git will return the submodules to the trunk. So, if you are working on a specific branch, you will need to switch to that branch again. Often times the changes are substantial and will require cleaning the branch before building. The next section explains how to do this.
+
 ### Troubleshooting
 
 Updates to the software, either on the main trunk or your local changes, can often lead to unexpected compiling errors. Performing a "total reset" of your branch in both ldmx-sw and ldmx-analysis can often fix the problem. To perform the reset, do the following commands:
