@@ -4,7 +4,7 @@
 #SBATCH --time=1:00:00
 #SBATCH --output=log/neutron_%a.out
 #SBATCH --partition=standard
-#SBATCH -A hep_aag
+#SBATCH -A ldmx
 
 source "$LDMX_BASE/ldmx-sw/scripts/ldmx-env.sh"
 

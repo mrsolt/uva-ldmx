@@ -17,16 +17,20 @@ neutron_gun.particle = 'neutron'
 neutron_gun.energy = 1.0 # GeV
 #Fire neutrons at the front face of the back Hcal
 #Note the z position is hardcoded to the v12 detector value
-neutron_gun.position = [0., 0., 840.] 
+neutron_gun.position = [0., 0., 840.]
 neutron_gun.direction = [0., 0., 1.]
 sim.generators.append(neutron_gun)
 
 import LDMX.Ecal.EcalGeometry
 from LDMX.Hcal import hcal
-#Add the sim and hcal reconstruction to the sequence
-p.sequence=[  
-        sim, 
-        hcal.HcalDigiProducer(),
+import LDMX.Hcal.HcalGeometry
+import LDMX.Hcal.hcal_hardcoded_conditions
+import LDMX.Hcal.digi as hcal_digi
+
+p.sequence=[
+        sim,
+        hcal_digi.HcalDigiProducer(),
+        hcal_digi.HcalRecProducer(),
         hcal.HcalVetoProcessor()
 ]
 
