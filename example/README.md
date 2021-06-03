@@ -21,13 +21,13 @@ See instructions on how to build ldmx-sw and ldmx-analysis on Rivanna in the hom
 The following config file shoots 10,000 neutrons at 1 GeV at the front face of the HCal. You can run the script by doing the following:
 
 ```bash
-ldmx fire config/neutrons.py <run number> neutron.root
+ldmx fire uva-ldmx/example/config/neutrons.py <run number> neutron.root
 ```
 
 Note the run number sets the seed, so when running multiple jobs the run number needs to be different for each job submission (see below). Next, run the analysis.
 
 ```bash
-ldmx fire config/HcalAna.py neutron_analysis.root neutron.root
+ldmx fire uva-ldmx/example/config/HcalAna.py neutron_analysis.root neutron.root
 ```
 
 # Using the Batch Scripts
