@@ -61,7 +61,7 @@ You can run ldmx-analysis in the same way as running ldmx-sw with the ```ldmx fi
 
 ### Updating Branches
 
-You will want to update your local repositories frequently to keep up with the rapid changes of ldmx-sw. You must both update the repository and the submodules. Make sure your changes are committed, then do:
+You will want to update your local repositories frequently to keep up with the rapid changes of ldmx-sw. You must both update the repository and the submodules. Make sure your changes are committed, then in the ldmx-sw directory do:
 
 ```bash
 git pull
