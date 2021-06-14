@@ -53,11 +53,11 @@ infile = TFile(remainder[1])
 histo = infile.Get("myana/myana_lambda")
 nevents = histo.GetEntries()
 
-h = TH1F("h", "h", histo.GetNbinsX(), histo.GetXaxis().GetBinLowEdge(1), histo.GetXaxis().GetBinUpEdge(histo.GetNbinsX()))
+h = TH1F("h", "h", histo.GetNbinsX()/10, histo.GetXaxis().GetBinLowEdge(1), histo.GetXaxis().GetBinUpEdge(histo.GetNbinsX()))
 
 #Calculate the Inefficieny
 for i in range(h.GetNbinsX()):
-    n = histo.Integral(1,i)
+    n = histo.Integral(1,i*10)
     ineff = 1 - n / float(nevents)
     err = np.sqrt(nevents - n)/nevents #Need to double check if this is calculated correctly
     h.SetBinContent(i, ineff)
