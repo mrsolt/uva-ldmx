@@ -8,7 +8,7 @@ import sys
 proc = 'v12'
 p = ldmxcfg.Process(proc)
 p.outputFiles = [sys.argv[4]]
-p.maxEvents = 32000
+p.maxEvents = int(sys.argv[5])
 p.logFrequency = 1
 p.termLogLevel = 0
 p.run = int(sys.argv[1])
