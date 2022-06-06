@@ -60,3 +60,13 @@ This process takes a lot of time. If you are running a batch job, you should set
 ## Running Visible Simulation on UVA Rivanna
 
 Example slurm files for running the above two steps on the Rivanna batch system are in the batch directory. Note the location of the input files and output files including the log file.
+
+## Instructions for Running the Visible Trigger Skims
+  
+To run the visible trigger skim, run the following command.
+  
+```bash
+ldmx fire VisibleTriggerSkim.py <run number> <output root file> <input root file>
+```
+  
+The maximum energy and the Ecal layers that are summed are both configurable in the script.
