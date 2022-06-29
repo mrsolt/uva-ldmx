@@ -12,6 +12,7 @@ import getopt
 #List arguments
 def print_usage():
     print ('\nOptions')
+    print ('\t-a: beam energy (default 4 GeV)')
     print ('\t-l: input LHE file')
     print ('\t-o: output directory')
     print ('\t-n: output files base name')
@@ -104,10 +105,12 @@ energy = 4.0 # beam energy GeV
 outdir = ""
 outname = ""
 
-options, remainder = getopt.gnu_getopt(sys.argv[1:], 'hl:o:n:e:m:y:z:u')
+options, remainder = getopt.gnu_getopt(sys.argv[1:], 'ha:l:o:n:e:m:y:z:u')
 
 # Parse the command line arguments
 for opt, arg in options:
+    if opt=='-a':
+        energy = float(arg)
     if opt=='-l':
         lhe = str(arg)
     if opt=='-o':
