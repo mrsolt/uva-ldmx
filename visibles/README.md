@@ -23,6 +23,8 @@ options:
 
 -h = print help
 
+-a = beam energy (default 4 GeV)
+
 -l = input LHE file
 
 -o = output directory
