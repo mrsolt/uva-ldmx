@@ -11,7 +11,8 @@ from LDMX.Framework import ldmxcfg
 # first, we define the process, which must have a name which identifies this
 # processing pass ("pass name").
 # the other two pass names refer to those of the input files which will be combined in this job.
-thisPassName="v3.0.0" #overlay"
+#thisPassName="v3.0.0" #overlay"
+thisPassName="v12" #overlay"
 simPassName="v12"
 nElectrons=1
 p=ldmxcfg.Process( thisPassName )
