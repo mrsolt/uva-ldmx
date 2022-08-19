@@ -8,7 +8,7 @@ p=ldmxcfg.Process("egsim")
 p.run = int(sys.argv[1])
 sim = simulator.simulator( "neutron" )
 sim.setDetector( "ldmx-det-v12" )
-sim.runNumber = int(sys.argv[1])
+#sim.runNumber = int(sys.argv[1])
 sim.description = "Neutron fired at the Hcal"
 
 #Define a neutron gun and set the parameters
