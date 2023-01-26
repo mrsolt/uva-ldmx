@@ -14,6 +14,6 @@
 #
 #SBATCH --gpus 1
 
-source $LDMX_BASE/scripts/ldmx-env.sh
+source $LDMX_BASE/ldmx-sw/scripts/ldmx-env.sh
 
 ldmx fire neutrons.py ${SLURM_ARRAY_TASK_ID} /scratch/mrsolt/neutron_${SLURM_ARRAY_TASK_ID}.root
