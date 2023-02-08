@@ -220,14 +220,20 @@ with open(lhe, 'r') as ogfile, open(bremfile, 'w') as bremf, open(decayfile, 'w'
 
         # Skip mgrwt. add appropriate vertex, and end event
         elif event_line == 16 :
-            t = 0.
+            #t = 0.
+            d_vertex = np.array((-9999.,-9999.,-9999.))
             if(uniform):
-                t = np.random.uniform(tmin, tmax)
+                #t = np.random.uniform(tmin, tmax)
+                t = 0.
+                d = np.random.uniform(zmin, zmax)
+                x,y,z,t = 0., 0., 0., t
+                c_vertex = np.array((x,y,z))
+                d_vertex = c_vertex + Ap_3mom/np.linalg.norm(Ap_3mom) * d
             else:
                 t = np.random.exponential(tau)
-            x,y,z,t = 0., 0., 0., t
-            c_vertex = np.array((x,y,z))
-            d_vertex = c_vertex + Ap_3mom * c_speed / mAp * t
+                x,y,z,t = 0., 0., 0., t
+                c_vertex = np.array((x,y,z))
+                d_vertex = c_vertex + Ap_3mom * c_speed / mAp * t
 
             # If not in allowed z, don't write event
             if not (zmin < d_vertex[2] < zmax):

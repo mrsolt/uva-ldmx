@@ -16,7 +16,6 @@ p.run = int(sys.argv[1])
 sim = simulator.simulator('visible_signal')
 sim.description = "A' -> ee visible signal decay"
 sim.setDetector('ldmx-det-v12',True)
-sim.runNumber = int(sys.argv[1])
 
 # Generators
 from LDMX.SimCore import generators
