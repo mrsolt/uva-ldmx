@@ -5,17 +5,17 @@ import sys
 #Example command:
 #ldmx fire ap_producer.py <run number> <dark brem file> <ap decay file> <output file>
 
-proc = 'v12'
+proc = 'v14'
 p = ldmxcfg.Process(proc)
 p.outputFiles = [sys.argv[4]]
 p.maxEvents = int(sys.argv[5])
-p.logFrequency = 1000
+#p.logFrequency = 1
 p.termLogLevel = 0
 p.run = int(sys.argv[1])
 
 sim = simulator.simulator('visible_signal')
 sim.description = "A' -> ee visible signal decay"
-sim.setDetector('ldmx-det-v12',True)
+sim.setDetector('ldmx-det-v14',True)
 
 # Generators
 from LDMX.SimCore import generators
