@@ -29,7 +29,7 @@ from LDMX.Recon.simpleTrigger import simpleTrigger
 # Set run parameters
 #
 p.inputFiles = [ sys.argv[2] ]
-p.run = sys.argv[1]
+p.run = int(sys.argv[1])
 
 # electron counter so simpletrigger doesn't crash
 eCount = ElectronCounter( nElectrons, "ElectronCounter") # first argument is number of electrons in simulation
@@ -46,7 +46,6 @@ p.sequence=[ eCount, simpleTrigger ]
 
 p.outputFiles=[sys.argv[3]]
 
-
-p.termLogLevel = 0  # default is 2 (WARNING); but then logFrequency is ignored. level 1 = INFO.
+#p.termLogLevel = 0  # default is 2 (WARNING); but then logFrequency is ignored. level 1 = INFO.
 #print this many events to stdout (independent on number of events, edge case: round-off effects when not divisible. so can go up by a factor 2 or so)
-p.logFrequency = 1000
+#p.logFrequency = 1000
