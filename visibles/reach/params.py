@@ -3,14 +3,14 @@ outfile = "output"
 ebeam = 4. #GeV
 zmin = 50. #cm
 zmax = 500. #cm
-eot = 1.e14
-background = 10
+eot = 4.e14
+background = 9
 
-NepsBins = 100
+NepsBins = 1000
 epsmin = -7 #logeps
 epsmax = -2 #logeps
 
-nMass = 100
+nMass = 1000
 massmin = -2 #logmass GeV
 massmax = 0 #logmass GeV
 

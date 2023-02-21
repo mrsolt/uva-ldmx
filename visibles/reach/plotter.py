@@ -31,7 +31,7 @@ def MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zm
                 if(not eatvis):
                     Naprime = rc.N_ap(mass, eps, eot)
                 else:
-                    Naprime = rc.N_ap(mass, eps, eot)
+                    Naprime = rc.N_ap_eatvis(mass, eps, eot)
                 gctau = rc.GammaCTau(ebeam, mass, eps)
                 nsig = rc.N_sig(Naprime, zmin, zmax, gctau)
                 NAprime.Fill(mass, eps, Naprime)

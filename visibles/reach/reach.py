@@ -40,17 +40,18 @@ file_contents = f.read()
 print (file_contents)
 f.close()
 
-
 my_module = load_module(paramfile, "params")
 from params import *
 
+outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}bkg_{6:.0f}eff".format(outfile, eot, ebeam, zmin, zmax, background, eff_const*100)
 minSignal = rc.MinSignal(background)
 
 if(plotoutput):
-    p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, zmin, zmax, eff_const, outfile, eatvis = eatvis)
+    outplot = outbasename
+    p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, zmin, zmax, eff_const, outplot, eatvis = eatvis)
 
 if(csvoutput):
     _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zmin, zmax, eff_const, eatvis = eatvis)
-    outcsv = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}to{4:.0f}cm.csv".format(outfile, eot, ebeam, zmin, zmax)
+    outcsv = outbasename + ".csv"
     import ContourCSV as c
     c.OutputCSV(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, detectable, outcsv)
