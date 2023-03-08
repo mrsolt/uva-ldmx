@@ -2,7 +2,7 @@ from LDMX.SimCore import simulator
 from LDMX.SimCore import generators
 from LDMX.SimCore import bias_operators
 from LDMX.Biasing import filters
-#from LDMX.Biasing import util
+from LDMX.Biasing import util
 #from LDMX.Biasing import include as includeBiasing
 
 from LDMX.Framework import ldmxcfg
@@ -37,13 +37,14 @@ sim.generators.append( generator )
 
 # Configure the sequence in which user actions should be called.
 sim.actions.extend([
-        filters.TaggerVetoFilter(),
+        #filters.TaggerVetoFilter(),
         # Only consider events where a hard brem occurs
         filters.TargetBremFilter(),
         # Only consider events where a PN reaction happnes in the ECal
         #filters.EcalProcessFilter(),
         # Tag all photo-nuclear tracks to persist them to the event.
         #util.TrackProcessFilter.photo_nuclear()
+        util.DecayChildrenKeeper([22])
 ])
 
 from LDMX.Ecal import EcalGeometry
