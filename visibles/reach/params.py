@@ -5,6 +5,8 @@ zmin = 50. #cm
 zmax = 500. #cm
 eot = 4.e14
 background = 9
+#ecal_background = 0
+#hcal_background = 10
 
 NepsBins = 1000
 epsmin = -7 #logeps
