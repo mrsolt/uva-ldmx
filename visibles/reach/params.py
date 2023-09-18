@@ -1,11 +1,14 @@
 outfile = "output"
 
 ebeam = 4. #GeV
-zmin = 50. #cm
-zmax = 500. #cm
+#zmin = 50. #cm  --> these are general parameters. Need to specify ecal/hcal
+#zmax = 500. #cm
+e_zmin = 23.
+e_zmax = 70.
+#h_zmin = 70.
+#h_zmax = 500.
 eot = 4.e14
-background = 9
-#ecal_background = 0
+ecal_background = 0
 #hcal_background = 10
 
 NepsBins = 1000
