@@ -25,8 +25,10 @@ def MinSignal(b):
 
     n = [2.44, 2.86, 3.28, 3.62, 3.94, 4.20, 4.42, 4.63, 4.83, 5.18, 
          5.53, 5.90, 6.18, 6.49, 6.76, 7.02, 7.28, 7.51, 7.75, 7.99]
-    #some of these values correspond to b = #.5 --> Does not agree with for loop below. Need to fix
 
+    #number of background events that match values in table above
+    xp = [0.0, 0.5, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 
+          7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0]
 
     #Previous table from S. Yellin    
     #n = [2.303, 3.890, 5.800, 7.491, 9.059, 10.548, 12.009, 13.433,
@@ -35,9 +37,7 @@ def MinSignal(b):
     #        32.972, 34.203, 35.422, 36.632, 37.849, 39.108, 40.333,
     #        41.546, 42.768, 43.978, 45.164, 46.351, 47.544, 48.734,
     #        49.944, 51.139, 52.314, 53.488]
-    xp = []
-    for i in range(len(n)):
-        xp.append(i)
+    
     s = np.interp(b, xp, n)
     print("Contours made for an expected signal of {0}".format(s))
     return s
