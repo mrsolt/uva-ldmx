@@ -15,16 +15,26 @@ def GammaCTau(E, m, eps):
 
 #The table here is provided by S. Yellin from arXiv:physics/0203002v2
 #It needs to be double checked if this is appropriate or not
+
+#Changing to Table XII, 90% C.L. from Feldman and Cousins (arXiv:physics/9711021v2)
+
 def MinSignal(b):
-    if(b > 39):
-        print("Background levels not computed above 39 expected background events. Try again.")
+    if(b > 15):
+        print("Background levels not computed above 15 expected background events. Try again.")
         sys.exit(0)
-    n = [2.303, 3.890, 5.800, 7.491, 9.059, 10.548, 12.009, 13.433,
-            14.824, 16.196, 17.540, 18.891, 20.208, 21.520, 22.821,
-            24.119, 25.400, 26.669, 27.926, 29.197, 30.457, 31.690,
-            32.972, 34.203, 35.422, 36.632, 37.849, 39.108, 40.333,
-            41.546, 42.768, 43.978, 45.164, 46.351, 47.544, 48.734,
-            49.944, 51.139, 52.314, 53.488]
+
+    n = [2.44, 2.86, 3.28, 3.62, 3.94, 4.20, 4.42, 4.63, 4.83, 5.18, 
+         5.53, 5.90, 6.18, 6.49, 6.76, 7.02, 7.28, 7.51, 7.75, 7.99]
+    #some of these values correspond to b = #.5 --> Does not agree with for loop below. Need to fix
+
+
+    #Previous table from S. Yellin    
+    #n = [2.303, 3.890, 5.800, 7.491, 9.059, 10.548, 12.009, 13.433,
+    #        14.824, 16.196, 17.540, 18.891, 20.208, 21.520, 22.821,
+    #        24.119, 25.400, 26.669, 27.926, 29.197, 30.457, 31.690,
+    #        32.972, 34.203, 35.422, 36.632, 37.849, 39.108, 40.333,
+    #        41.546, 42.768, 43.978, 45.164, 46.351, 47.544, 48.734,
+    #        49.944, 51.139, 52.314, 53.488]
     xp = []
     for i in range(len(n)):
         xp.append(i)

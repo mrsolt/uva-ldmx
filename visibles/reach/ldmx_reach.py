@@ -135,8 +135,11 @@ phys2019plus2021_vertex_proj_low = np.genfromtxt('contours/hps_physics_run2019pl
 # Full luminosity reach
 hps_full_lumi = np.genfromtxt('contours/hps_full_lumi.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
-ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-ldmx_phase2 = np.genfromtxt('output_1e+16eot_8gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_ecal = np.genfromtxt('output_4e+14eot_4gev_50-70cm_0ecalbkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal = np.genfromtxt('output_4e+14eot_4gev_70-500cm_10hcalbkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+
+#ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_phase2 = np.genfromtxt('output_1e+16eot_8gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #
 # Vertex projections
@@ -746,13 +749,13 @@ ax.plot(t_target_upper['mass'], t_target_upper['eps'], linewidth=2, color='red')
 ax.text(2.1e-2, 2.5e-11, r"Thermal targets: $\alpha_D = 0.5, M_{A'}/M_{\chi} = 1.5$", color='red',
         rotation=40, fontsize=12)
 
-ax.plot(ldmx_phase1['mass'], ldmx_phase1['eps2'],
+ax.plot(ldmx_ecal['mass'], ldmx_ecal['eps2'],
         marker='None', linestyle='-', color='#e5ae38', lw=4)
-ax.text(0.003, 0.0000000005, 'LDMX Phase I', fontsize=20, color='#e5ae38');
+ax.text(0.003, 0.0000000005, 'LDMX Phase I Ecal', fontsize=20, color='#e5ae38');
 
-ax.plot(ldmx_phase2['mass'], ldmx_phase2['eps2'],
+ax.plot(ldmx_hcal['mass'], ldmx_hcal['eps2'],
         marker='None', linestyle='-', color='#6d904f', lw=4)
-ax.text(0.003, 0.0000000001, 'LDMX Phase II', fontsize=20, color='#6d904f');
+ax.text(0.003, 0.0000000001, 'LDMX Phase I Hcal', fontsize=20, color='#6d904f');
 
 draw_existing_limits_color(ax)
 ax.set_title("");
