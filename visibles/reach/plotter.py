@@ -27,6 +27,7 @@ def MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zm
         for j in range(0, NepsBins):
                 logeps = (epsmax - epsmin)/float(NepsBins - 1) * j + epsmin
                 eps = 10**logeps
+                eps_2 = pow(eps,2) #epsilon^2
                 Naprime = 0
                 if(not eatvis):
                     Naprime = rc.N_ap(mass, eps, eot)

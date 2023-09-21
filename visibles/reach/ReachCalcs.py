@@ -27,7 +27,7 @@ def MinSignal(b):
          5.53, 5.90, 6.18, 6.49, 6.76, 7.02, 7.28, 7.51, 7.75, 7.99]
 
     #number of background events that match values in table above
-    xp = [0.0, 0.5, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 
+    xp = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 
           7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0]
 
     #Previous table from S. Yellin    
