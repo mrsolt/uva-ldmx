@@ -1,8 +1,6 @@
 # LDMX Reach Calculations
 
-Reach contours for LMDX for the minimal dark photon can be constructed with some given assumptions. These assumptions are configurable in the params.py 
-file and the parameters are explained in the file (To Do: explain these better). In order to produce a reach contour, you must have all the .py files in 
-this directory. Then, run the following command.
+Reach contours for LMDX for the minimal dark photon can be constructed with some given assumptions. These assumptions are configurable in the params.py file and the parameters are explained in the file (To Do: explain these better). To select either a subdetector system or the entire detector, change the corresponding parameter (Ecal/Hcal/Combined) to True in the file. If you only want a CSV file with $\epsilon^2$ instead of $\epsilon$, set plotoutput to False and eps2 to True. In order to produce a reach contour, you must have all the .py files in this directory. Then, run the following command.
 
 ```bash
 python3 uva-ldmx/visibles/reach/reach.py <params.py file>
