@@ -135,8 +135,8 @@ phys2019plus2021_vertex_proj_low = np.genfromtxt('contours/hps_physics_run2019pl
 # Full luminosity reach
 hps_full_lumi = np.genfromtxt('contours/hps_full_lumi.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
-ldmx_ecal = np.genfromtxt('output_4e+14eot_4gev_50-70cm_0ecalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-ldmx_hcal = np.genfromtxt('output_4e+14eot_4gev_70-500cm_10hcalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_ecal = np.genfromtxt('output_4e+14eot_4gev_50-70cm_2.5ecalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal = np.genfromtxt('output_4e+14eot_4gev_70-500cm_5hcalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 #ldmx_phase2 = np.genfromtxt('output_1e+16eot_8gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')

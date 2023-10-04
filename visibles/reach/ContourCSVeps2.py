@@ -3,7 +3,7 @@ import csv
 def OutputCSV(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, detectable, outcsv):
     with open(outcsv, 'w') as f: # creates csv
             f = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            f.writerow(["Mass", "Epsilon"])
+            f.writerow(["Mass", "Epsilon^2"])
             for i in range(0, nMass):
                 logmass = (massmax - massmin)/float(nMass - 1) * i + massmin
                 mass = 10**logmass

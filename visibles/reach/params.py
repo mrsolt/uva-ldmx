@@ -10,7 +10,7 @@ h_zmax = 500. #cm
 eot = 4.e14
 ecal_background = 5
 hcal_background = 10
-combined_background = 15
+combined_background = 0   #want to do 0, 5, 10, 15
 
 NepsBins = 1000
 epsmin = -7 #logeps
@@ -23,8 +23,8 @@ massmax = 0 #logmass GeV
 eff_const = 0.5 #entire detector for now, will get more specific later
 
 csvoutput = True      #default to True
-plotoutput = True     #default to True
-eps2 = False          #default to False, sets whether or not we want eps^2
+plotoutput = False     #default to True
+eps2 = False          #default to False, calculates eps^2 (True) or eps (False) values for CSV
 eatvis = False        #default to False
 
 
