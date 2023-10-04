@@ -45,9 +45,9 @@ from params import *
 
 if (Ecal):
     if(eps2):
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}ecalbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, e_zmin, e_zmax, ecal_background, eff_const*100)
+        outbasename = "{0}_test_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}ecalbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, e_zmin, e_zmax, ecal_background, eff_const*100)
     else:
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}ecalbkg_{6:.0f}eff".format(outfile, eot, ebeam, e_zmin, e_zmax, ecal_background, eff_const*100)
+        outbasename = "{0}_test_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}ecalbkg_{6:.0f}eff".format(outfile, eot, ebeam, e_zmin, e_zmax, ecal_background, eff_const*100)
 
         minSignal = rc.MinSignal(ecal_background)
 
@@ -65,11 +65,11 @@ if (Ecal):
             import ContourCSV as c
             c.OutputCSV(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, detectable, outcsv)
 
-if (Hcal):
+elif (Hcal):
     if(eps2):
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}hcalbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, eff_const*100)
+        outbasename = "{0}_test_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}hcalbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, eff_const*100)
     else:
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}hcalbkg_{6:.0f}eff".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, eff_const*100)
+        outbasename = "{0}_test_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}hcalbkg_{6:.0f}eff".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, eff_const*100)
 
         minSignal = rc.MinSignal(hcal_background)
 
@@ -88,11 +88,11 @@ if (Hcal):
             c.OutputCSV(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, detectable, outcsv)
 
 
-if (Combined):
+elif (Combined):
     if(eps2):
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, zmin, zmax, combined_background, eff_const*100)
+        outbasename = "{0}_test_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, zmin, zmax, combined_background, eff_const*100)
     else:
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}eff".format(outfile, eot, ebeam, zmin, zmax, combined_background, eff_const*100)
+        outbasename = "{0}_test_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}eff".format(outfile, eot, ebeam, zmin, zmax, combined_background, eff_const*100)
 
         minSignal = rc.MinSignal(combined_background)
 
@@ -109,3 +109,8 @@ if (Combined):
         else:
             import ContourCSV as c
             c.OutputCSV(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, detectable, outcsv)
+
+
+else:
+    print("No detector or detector sub-system selected. See params.py to fix.")
+    sys.exit(0)

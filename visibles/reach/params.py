@@ -20,17 +20,22 @@ nMass = 1000
 massmin = -2 #logmass GeV
 massmax = 0 #logmass GeV
 
+eff_const = 0.5 #entire detector for now, will get more specific later
+
 csvoutput = True      #default to True
-plotoutput = True    #default to True
-eps2 = False           #default to False, sets whether or not we want eps^2
+plotoutput = True     #default to True
+eps2 = False          #default to False, sets whether or not we want eps^2
 eatvis = False        #default to False
 
-#set only one of these to True at a time
+
+
+########### set only one of these to True at a time ###########
+
 Ecal = False          #default to False, select Ecal only parameters
 Hcal = False          #default to False, select Hcal only parameters
-Combined = False      #default to False, combine ecal/hcal parameters (distance and background amounts)
+Combined = True      #default to False, combine ecal/hcal parameters (distance and background amounts)
 
-eff_const = 0.5
+
 
 #things that may be used in the future
 subsys_eff = False
