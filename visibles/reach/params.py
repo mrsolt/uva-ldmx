@@ -12,6 +12,8 @@ ecal_background = 5        #0, 2.5, 5
 hcal_background = 15       #0, 5, 10, 15
 combined_background = 15   #0, 5, 10, 15
 
+#10/13/2023 --> 47 bkg in Hcal from Lincoln, ~ 10 (?) bkg in Ecal from Tyler
+
 NepsBins = 1000
 epsmin = -7 #logeps
 epsmax = -2 #logeps
@@ -28,15 +30,15 @@ hcal_eff = 0.3        #conservative guess, need input from Lincoln
 csvoutput = True      #default to True
 plotoutput = False     #default to True
 eps2 = False          #default to False, calculates eps^2 (True) or eps (False) values for CSV
-eatvis = False        #default to False
+eatvis = False        #default to False, Ecal as Target
 
 
 
 ########### set only one of these to True at a time ###########
 
 Ecal = False          #default to False, select Ecal only parameters
-Hcal = True          #default to False, select Hcal only parameters
-Combined = False      #default to False, combine ecal/hcal parameters (distance, background, and efficiency)
+Hcal = False          #default to False, select Hcal only parameters
+Combined = True      #default to False, combine ecal/hcal parameters (distance, background, and efficiency)
 
 
 

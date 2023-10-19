@@ -56,7 +56,7 @@ if(Ecal):
         p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, e_zmin, e_zmax, ecal_eff, outplot, eatvis = eatvis)
 
     if(csvoutput):
-        _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, e_zmin, e_zmax, ecal_eff, eatvis = eatvis)
+        _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, e_zmin, e_zmax, ecal_eff, hcal_eff, eatvis = eatvis, ecal = Ecal, hcal = Hcal, combo = Combined)
         outcsv = outbasename + ".csv"
         if(eps2):
             import ContourCSVeps2 as c
@@ -78,7 +78,7 @@ elif(Hcal):
         p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, h_zmin, h_zmax, hcal_eff, outplot, eatvis = eatvis)
 
     if(csvoutput):
-        _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, h_zmin, h_zmax, hcal_eff, eatvis = eatvis)
+        _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, h_zmin, h_zmax, ecal_eff, hcal_eff, eatvis = eatvis, ecal = Ecal, hcal = Hcal, combo = Combined)
         outcsv = outbasename + ".csv"
         if(eps2):
             import ContourCSVeps2 as c
@@ -90,18 +90,18 @@ elif(Hcal):
 
 elif(Combined):
     if(eps2):
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, zmin, zmax, combined_background, eff_const*100)
+        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}ecaleff_{7:.0f}hcaleff_eps2".format(outfile, eot, ebeam, zmin, zmax, combined_background, ecal_eff*100, hcal_eff*100)
     else:
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}eff".format(outfile, eot, ebeam, zmin, zmax, combined_background, eff_const*100)
+        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}ecaleff_{7:.0f}hcaleff".format(outfile, eot, ebeam, zmin, zmax, combined_background, ecal_eff*100, hcal_eff*100)
 
     minSignal = rc.MinSignal(combined_background)
 
     if(plotoutput):
         outplot = outbasename
-        p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, zmin, zmax, eff_const, outplot, eatvis = eatvis)
+        p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, zmin, zmax, ecal_eff, hcal_eff, outplot, eatvis = eatvis, ecal = False, hcal = False, combo = Combined)
 
     if(csvoutput):
-        _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zmin, zmax, eff_const, eatvis = eatvis)
+        _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zmin, zmax, ecal_eff, hcal_eff, eatvis = eatvis, ecal = False, hcal = False, combo = Combined)
         outcsv = outbasename + ".csv"
         if(eps2):
             import ContourCSVeps2 as c

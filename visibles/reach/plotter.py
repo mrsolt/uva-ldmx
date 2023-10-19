@@ -9,7 +9,7 @@ def openPDF(outfile,canvas):
 def closePDF(outfile,canvas):
     canvas.Print(outfile+".pdf]")
 
-def MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zmin, zmax, eff_const, eatvis = False):
+def MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zmin, zmax, ecal_eff, hcal_eff, eatvis = False, ecal = False, hcal = False, combo = False):
     Medges = array.array('d')
     Epsedges = array.array('d')
     for i in range(0,nMass+1):
@@ -20,6 +20,8 @@ def MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zm
     NAprime = TH2F("NAprime", "NAprime", nMass, Medges, NepsBins, Epsedges)
     GamCTau = TH2F("GamCTau", "GamCTau", nMass, Medges, NepsBins, Epsedges)
     detectable = TH2F("detectable", "detectable", nMass, Medges, NepsBins, Epsedges)
+
+    full_detect = 0
 
     for i in range(0, nMass):
         logmass = (massmax - massmin)/float(nMass - 1) * i + massmin
@@ -33,10 +35,31 @@ def MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zm
                 else:
                     Naprime = rc.N_ap_eatvis(mass, eps, eot)
                 gctau = rc.GammaCTau(ebeam, mass, eps)
-                nsig = rc.N_sig(Naprime, zmin, zmax, gctau)
+               
+
+                if(ecal):
+                    nsig = rc.N_sig(Naprime, zmin, zmax, gctau)
+                    detectable.Fill(mass, eps, nsig*ecal_eff)
+
+                elif(hcal):
+                    nsig = rc.N_sig(Naprime, zmin, zmax, gctau)
+                    detectable.Fill(mass, eps, nsig*hcal_eff)
+
+                elif(combo):
+                    nsig_ecal = rc.N_sig(Naprime, zmin, zmax, gctau)
+                    nsig_hcal = rc.N_sig(Naprime, zmin, zmax, gctau)
+                    ecal_detect = nsig_ecal*ecal_eff
+                    hcal_detect = nsig_hcal*hcal_eff
+                    full_detect = ecal_detect + hcal_detect    #combined detector efficiency, at each z position/mass/eps point
+                    #print("The combined detector efficiency is ", full_detect)
+                    detectable.Fill(mass, eps, full_detect)
+
+                else:
+                    print("No detector selected.")
+
                 NAprime.Fill(mass, eps, Naprime)
                 GamCTau.Fill(mass, eps, gctau)
-                detectable.Fill(mass, eps, nsig*eff_const)
+
     return NAprime, GamCTau, detectable
 
 def SaveToPDF(NAprime, GamCTau, detectable, minSignal, ebeam, eot, outfile, nlevels = 1, label = ""):
@@ -74,8 +97,8 @@ def SaveToPDF(NAprime, GamCTau, detectable, minSignal, ebeam, eot, outfile, nlev
     c.Print(outfile+".pdf")
     closePDF(outfile,c)
 
-def MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot,  zmin, zmax, eff_const, outfile, nlevels = 1, label = "", eatvis = False):
-	NAprime, GamCTau, detectable = MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zmin, zmax, eff_const, eatvis)
+def MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot,  zmin, zmax, ecal_eff, hcal_eff, outfile, nlevels = 1, label = "", eatvis = False, ecal = False, hcal = False, combo = False):
+	NAprime, GamCTau, detectable = MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zmin, zmax, ecal_eff, hcal_eff, eatvis, ecal, hcal, combo)
 	SaveToPDF(NAprime, GamCTau, detectable, minSignal, ebeam, eot, outfile, nlevels = 1, label = "")
 
 if (__name__ == '__main__'):
