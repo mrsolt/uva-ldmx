@@ -53,7 +53,7 @@ if(Ecal):
 
     if(plotoutput):
         outplot = outbasename
-        p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, e_zmin, e_zmax, ecal_eff, outplot, eatvis = eatvis)
+        p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, zmin, zmax, ecal_eff, hcal_eff, outplot, eatvis = eatvis, ecal = Ecal, hcal = False, combo = False)
 
     if(csvoutput):
         _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, e_zmin, e_zmax, ecal_eff, hcal_eff, eatvis = eatvis, ecal = Ecal, hcal = Hcal, combo = Combined)
@@ -75,7 +75,7 @@ elif(Hcal):
 
     if(plotoutput):
         outplot = outbasename
-        p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, h_zmin, h_zmax, hcal_eff, outplot, eatvis = eatvis)
+        p.MakePlots(massmin, massmax, nMass, epsmin, epsmax, NepsBins, minSignal, ebeam, eot, zmin, zmax, ecal_eff, hcal_eff, outplot, eatvis = eatvis, ecal = False, hcal = Hcal, combo = False)
 
     if(csvoutput):
         _, _, detectable = p.MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, h_zmin, h_zmax, ecal_eff, hcal_eff, eatvis = eatvis, ecal = Ecal, hcal = Hcal, combo = Combined)
