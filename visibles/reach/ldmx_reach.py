@@ -135,7 +135,7 @@ phys2019plus2021_vertex_proj_low = np.genfromtxt('contours/hps_physics_run2019pl
 # Full luminosity reach
 hps_full_lumi = np.genfromtxt('contours/hps_full_lumi.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
-ldmx_ecal = np.genfromtxt('output_4e+14eot_4gev_50-70cm_2.5ecalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_ecal = np.genfromtxt('output_4e+14eot_4gev_50-70cm_0ecalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 ldmx_hcal = np.genfromtxt('output_4e+14eot_4gev_70-500cm_5hcalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
@@ -426,6 +426,18 @@ lhcb_ll_01_2019 = np.genfromtxt('contours/lhcb_2019_results_ll_01.csv',
                             delimiter=',')
 current_results.append(lhcb_ll_01_2019)
 
+
+#
+# FASER
+#
+
+# 2023 FASER Dark Photon
+FASER_dark_photon = np.genfromtxt('contours/FASER_DarkPhoton_90CL.csv',
+                            dtype=[('mass', 'f8'), # GeV
+                                    ('eps', 'f8')], # epsilon^2
+                            delimiter=',')
+current_results.append(FASER_dark_photon)
+
 #
 # Thermal targets
 #
@@ -572,6 +584,13 @@ def draw_existing_limits_color(ax):
     ##
     ## Beam Dump
     ##
+
+    #
+    # FASER
+    #
+    ax.fill_between(FASER_dark_photon['mass'], FASER_dark_photon['eps'], 0.001,
+                    alpha=0.2, facecolor='#00FFFF', edgecolor='#00FFFF', linewidth=2)
+    ax.text(0.025, 0.0000000015, 'FASER', fontsize=15, color='#06C2AC', fontweight='bold')
 
     #
     # NA64
