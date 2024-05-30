@@ -10,10 +10,10 @@ These instructions are taken from the [LDMX wiki](https://ldmx-software.github.i
 Operating ldmx-sw in the container (which contains all the correct versions of the required software) is the simplest and cleanest way to build and run the LDMX software. ldmx-sw uses a Docker image, but this requires sudo privileges on Rivanna. However, docker images can be downloaded and converted using singularity. First, make sure you are operating in a bash terminal and then type
 
 ```bash
-module load singularity/3.7.1
+module load apptainer
 ```
 
-If you will be a frequent user, you should add the singularity module to your bash rc. Next, clone the ldmx-sw repository.
+Next, clone the ldmx-sw repository.
 
 ```bash
 git clone --recursive https://github.com/LDMX-Software/ldmx-sw.git
