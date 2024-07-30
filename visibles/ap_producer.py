@@ -3,14 +3,15 @@ from LDMX.SimCore import simulator
 import sys
 
 #Example command:
-#ldmx fire ap_producer.py <run number> <dark brem file> <ap decay file> <output file>
+#ldmx fire ap_producer.py <run number> <dark brem file> <ap decay file> <output file> <number of events>
 
 proc = 'v14'
 p = ldmxcfg.Process(proc)
 p.outputFiles = [sys.argv[4]]
 p.maxEvents = int(sys.argv[5])
-#p.logFrequency = 1
-p.termLogLevel = 0
+p.logFrequency = 100
+p.termLogLevel = 4
+p.fileLogLevel = 4
 p.run = int(sys.argv[1])
 
 sim = simulator.simulator('visible_signal')
@@ -45,3 +46,5 @@ p.sequence=[
         hcal_digi.HcalRecProducer(),
         hcal_py.HcalVetoProcessor(),
         ]
+
+#p.pause()

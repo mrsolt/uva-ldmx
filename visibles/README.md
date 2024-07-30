@@ -49,7 +49,7 @@ Source the ldmx environment.
 source ldmx-sw/scripts/ldmx-env.sh
 ```
 
-Run the following command.
+Run the following command. If you are using 8 GeV input files, be sure to edit '```ap_producer.py``` to have the correct detector geometry. For v14, the 4 GeV geometry is ```ldmx-det-v14``` and the 8 GeV geometry is ```ldmx-det-v14-8gev```. 
 
 ```bash
 ldmx fire ap_producer.py <run number> <dark brem file> <ap decay file> <output file> <max events>

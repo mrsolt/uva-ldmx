@@ -64,6 +64,14 @@ current_results.append(engrun2016)
 # Bump hunt projections
 #
 
+# HPS 2015+2016 engineering run reach
+## -- Bump hunt
+engrun20152016 = np.genfromtxt('contours/bhCombinedReach.csv',
+                           dtype=[('mass',    'f8'), # MeV
+                                  ('epsilon2', 'f8')], # epsilon^2
+                           delimiter=',')
+
+
 # HPS 1.1 GeV, 4 weeks bump hunt projection - positron trigger + L0 upgrades
 hps_1pt1_bh_proj_pos_l0 = np.genfromtxt('contours/hps_1pt1_4weeks_bh_proj_pos_trig_l0.csv',
                                  dtype=[('mass', 'f8'),
@@ -135,11 +143,13 @@ phys2019plus2021_vertex_proj_low = np.genfromtxt('contours/hps_physics_run2019pl
 # Full luminosity reach
 hps_full_lumi = np.genfromtxt('contours/hps_full_lumi.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
-ldmx_ecal = np.genfromtxt('output_4e+14eot_4gev_50-70cm_0ecalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-ldmx_hcal = np.genfromtxt('output_4e+14eot_4gev_70-500cm_5hcalbkg_50eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_ecal_4gev = np.genfromtxt('output_4e+14eot_4gev_50-70cm_32ecalbkg_55eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal_4gev = np.genfromtxt('output_4e+14eot_4gev_77-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_ecal_8gev = np.genfromtxt('output_1e+16eot_8gev_50-70cm_31ecalbkg_55eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal_8gev = np.genfromtxt('output_1e+16eot_8gev_77-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
-#ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-#ldmx_phase2 = np.genfromtxt('output_1e+16eot_8gev_50-500cm_9bkg_50eff.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_37combbkg_55ecaleff_60hcaleff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_phase2 = np.genfromtxt('output_1e+16eot_8gev_50-500cm_37combbkg_55ecaleff_60hcaleff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #
 # Vertex projections
@@ -456,12 +466,12 @@ t_target_lower = np.genfromtxt('contours/thermal_targets_lower.csv',
 
 def setup_fig_style(ax):
     plt.xticks(fontsize = 30)
-    plt.yticks(fontsize = 30)
+    plt.yticks(fontsize = 17)
 
     ax.set_xlabel("$A'$ Mass (GeV)", fontsize=30)
-    ax.set_ylabel('$\epsilon^2$', fontsize=35)
-    ax.set_ylim(0.00000000002, 0.0001)
-    ax.set_xlim(0.002, 1.5)
+    ax.set_ylabel('$\epsilon^2$', fontsize=30)
+    ax.set_ylim(0.00000000002, 0.0001) #0.00000000002, 0.0001
+    ax.set_xlim(0.002, 1.5)  #0.002, 1.5
     ax.tick_params(axis = 'both', which = 'both', length = 15)
     ax.set_title('$\\bf{HPS}$ $\\bf{Simulation}$ $\\bf{Preliminary}$', x=.7, y=.01, fontsize=20)
 
@@ -535,9 +545,14 @@ def draw_existing_limits_color(ax):
     #
 
     ## 2015
-    ax.fill_between(engrun2015['mass'], engrun2015['epsilon'], 0.001,
+    #ax.fill_between(engrun2015['mass'], engrun2015['epsilon'], 0.001,
+                    #alpha=0.2, facecolor='blue', edgecolor='blue', linewidth=2)
+    #ax.text(0.028, 0.00003, 'HPS 2015', fontsize=15, color='blue', fontweight='bold')
+
+    ## 2015 + 2016
+    ax.fill_between(engrun20152016['mass']/1000, engrun20152016['epsilon2'], 0.001,
                     alpha=0.2, facecolor='blue', edgecolor='blue', linewidth=2)
-    ax.text(0.028, 0.00003, 'HPS 2015', fontsize=15, color='blue', fontweight='bold')
+    ax.text(0.028, 0.00003, 'HPS 2015 and 2016', fontsize=15, color='blue', fontweight='bold')
 
     #
     # APEX Test
@@ -588,9 +603,9 @@ def draw_existing_limits_color(ax):
     #
     # FASER
     #
-    ax.fill_between(FASER_dark_photon['mass'], FASER_dark_photon['eps'], 0.001,
-                    alpha=0.2, facecolor='#00FFFF', edgecolor='#00FFFF', linewidth=2)
-    ax.text(0.025, 0.0000000015, 'FASER', fontsize=15, color='#06C2AC', fontweight='bold')
+    ax.fill_between(FASER_dark_photon['mass'], FASER_dark_photon['eps'],
+                    alpha=0.2, facecolor='#06C2AC', edgecolor='#06C2AC', linewidth=2)
+    ax.text(0.025, 0.0000000015, 'FASER', fontsize=15, color='#00FFFF', fontweight='bold') 
 
     #
     # NA64
@@ -768,17 +783,35 @@ ax.plot(t_target_upper['mass'], t_target_upper['eps'], linewidth=2, color='red')
 ax.text(2.1e-2, 2.5e-11, r"Thermal targets: $\alpha_D = 0.5, M_{A'}/M_{\chi} = 1.5$", color='red',
         rotation=40, fontsize=12)
 
-ax.plot(ldmx_ecal['mass'], ldmx_ecal['eps2'],
-        marker='None', linestyle='-', color='#e5ae38', lw=4)
-ax.text(0.003, 0.0000000005, 'LDMX Phase I Ecal', fontsize=20, color='#e5ae38');
 
-ax.plot(ldmx_hcal['mass'], ldmx_hcal['eps2'],
-        marker='None', linestyle='-', color='#6d904f', lw=4)
-ax.text(0.003, 0.0000000001, 'LDMX Phase I Hcal', fontsize=20, color='#6d904f');
+
+#ax.plot(ldmx_ecal_4gev['mass'], ldmx_ecal_4gev['eps2'],
+        #marker='None', linestyle='-', color='#e5ae38', lw=4)    #3c2420
+#ax.text(0.0022, 0.000000003, 'LDMX Ecal Only', fontsize=20, color='#e5ae38');
+
+ax.plot(ldmx_hcal_4gev['mass'], ldmx_hcal_4gev['eps2'],
+        marker='None', linestyle='-', color='#3c2420', lw=4)     ##6d904f
+ax.text(0.003, 0.0000000001, 'LDMX Phase I', fontsize=20, color='#3c2420');
+
+#ax.plot(ldmx_phase1['mass'], ldmx_phase1['eps2'],
+        #marker='None', linestyle='-', color='#e5ae38', lw=4)
+#ax.text(0.0025, 0.0000000005, 'LDMX Phase I', fontsize=20, color='#e5ae38');
+
+#ax.plot(ldmx_phase2['mass'], ldmx_phase2['eps2'],
+        #marker='None', linestyle='-', color='#6d904f', lw=4)
+#ax.text(0.003, 0.0000000001, 'LDMX Phase II', fontsize=20, color='#6d904f');
+
+#ax.plot(ldmx_ecal_8gev['mass'], ldmx_ecal_8gev['eps2'],
+        #marker='None', linestyle='-', color='#f19227', lw=4)
+#ax.text(0.1, 0.0000000005, 'LDMX Ecal II', fontsize=20, color='#f19227');
+
+ax.plot(ldmx_hcal_8gev['mass'], ldmx_hcal_8gev['eps2'],
+        marker='None', linestyle='-', color='#a5e538', lw=4)
+ax.text(0.1, 0.0000000001, 'LDMX Phase II', fontsize=20, color='#a5e538');
 
 draw_existing_limits_color(ax)
 ax.set_title("");
 #fig.savefig('final_coupling_upper_limits.pdf', facecolor='white')
-fig.savefig('test.pdf', facecolor='white')
+fig.savefig('Hcal_only.pdf', facecolor='white')
 
-plt.show()
+#plt.show()

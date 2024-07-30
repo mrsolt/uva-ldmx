@@ -1,35 +1,35 @@
 outfile = "output"
 
-ebeam = 4. #GeV
+ebeam = 8. #GeV
 zmin = 50. #cm
 zmax = 500. #cm
 e_zmin = 50. #cm
 e_zmax = 70. #cm
-h_zmin = 70. #cm
+h_zmin = 77. #cm
 h_zmax = 500. #cm
-eot = 4.e14
-ecal_background = 5        #0, 2.5, 5
-hcal_background = 15       #0, 5, 10, 15
-combined_background = 15   #0, 5, 10, 15
+eot = 1.e16
+ecal_background = 32        #including intermediate region
+hcal_background = 5       #from Lincoln
+combined_background = 37
 
-#10/13/2023 --> 47 bkg in Hcal from Lincoln, ~ 10 (?) bkg in Ecal from Tyler
+#12/2023 --> 26 Ecal/6 intermediate/5 Hcal
 
 NepsBins = 1000
 epsmin = -7 #logeps
 epsmax = -2 #logeps
 
 nMass = 1000
-massmin = -2 #logmass GeV       #change to -3 if using fancy plot
+massmin = -3 #logmass GeV       #change to -3 if using fancy plot (-2 for regular)
 massmax = 0 #logmass GeV
 
 
-ecal_eff = 0.35       #based off of Tyler's most recent result (after all cuts)
-hcal_eff = 0.3        #conservative guess, need input from Lincoln
+ecal_eff = 0.55      
+hcal_eff = 0.6       
 
 
 csvoutput = True      #default to True
 plotoutput = False     #default to True
-eps2 = False          #default to False, calculates eps^2 (True) or eps (False) values for CSV
+eps2 = True          #default to False, calculates eps^2 (True) or eps (False) values for CSV
 eatvis = False        #default to False, Ecal as Target
 
 
@@ -37,8 +37,8 @@ eatvis = False        #default to False, Ecal as Target
 ########### set only one of these to True at a time ###########
 
 Ecal = False          #default to False, select Ecal only parameters
-Hcal = False          #default to False, select Hcal only parameters
-Combined = True      #default to False, combine ecal/hcal parameters (distance, background, and efficiency)
+Hcal = True          #default to False, select Hcal only parameters
+Combined = False      #default to False, combine ecal/hcal parameters (distance, background, and efficiency)
 
 
 

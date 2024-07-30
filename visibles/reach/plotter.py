@@ -51,7 +51,6 @@ def MakeHistos(massmin, massmax, nMass, epsmin, epsmax, NepsBins, ebeam, eot, zm
                     ecal_detect = nsig_ecal*ecal_eff
                     hcal_detect = nsig_hcal*hcal_eff
                     full_detect = ecal_detect + hcal_detect    #combined detector efficiency, at each z position/mass/eps point
-                    #print("The combined detector efficiency is ", full_detect)
                     detectable.Fill(mass, eps, full_detect)
 
                 else:

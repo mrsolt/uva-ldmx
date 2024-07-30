@@ -38,9 +38,11 @@ files = []
 for i in range(int(len(remainder)/2)):
     files.append(str(remainder[i]))
 
+
 labels = []
 for i in range(int(len(remainder)/2), len(remainder)):
     labels.append(str(remainder[i]))
+
 
 for i in range(len(files)):
     file = files[i]
@@ -66,7 +68,7 @@ plt.ylabel(ylabel)
 plt.xlim([0.01, 1])
 plt.ylim([0.000001, 0.01])
 if(eps2):
-    plt.ylim([0.000001**2, 0.01**2])
+    plt.ylim([0.000001**2, 0.01**2]) #0.000001**2
 plt.xscale('log')
 plt.yscale('log')
 plt.title(title)
