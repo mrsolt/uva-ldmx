@@ -144,12 +144,16 @@ phys2019plus2021_vertex_proj_low = np.genfromtxt('contours/hps_physics_run2019pl
 hps_full_lumi = np.genfromtxt('contours/hps_full_lumi.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #ldmx_ecal_4gev = np.genfromtxt('output_4e+14eot_4gev_50-70cm_32ecalbkg_55eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-ldmx_hcal_4gev = np.genfromtxt('output_4e+14eot_4gev_77-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_hcal_4gev = np.genfromtxt('output_4e+14eot_4gev_77-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 #ldmx_ecal_8gev = np.genfromtxt('output_1e+16eot_8gev_50-70cm_31ecalbkg_55eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-ldmx_hcal_8gev = np.genfromtxt('output_1e+16eot_8gev_77-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_hcal_8gev = np.genfromtxt('output_1e+16eot_8gev_77-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_37combbkg_55ecaleff_60hcaleff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 #ldmx_phase2 = np.genfromtxt('output_1e+16eot_8gev_50-500cm_37combbkg_55ecaleff_60hcaleff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+
+ldmx_hcal_8gev_0 = np.genfromtxt('output_1e+14eot_8gev_95-500cm_0hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal_8gev_5 = np.genfromtxt('output_1e+14eot_8gev_95-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal_8gev_10 = np.genfromtxt('output_1e+14eot_8gev_95-500cm_10hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #
 # Vertex projections
@@ -789,9 +793,9 @@ ax.text(2.1e-2, 2.5e-11, r"Thermal targets: $\alpha_D = 0.5, M_{A'}/M_{\chi} = 1
         #marker='None', linestyle='-', color='#e5ae38', lw=4)    #3c2420
 #ax.text(0.0022, 0.000000003, 'LDMX Ecal Only', fontsize=20, color='#e5ae38');
 
-ax.plot(ldmx_hcal_4gev['mass'], ldmx_hcal_4gev['eps2'],
-        marker='None', linestyle='-', color='#3c2420', lw=4)     ##6d904f
-ax.text(0.003, 0.0000000001, 'LDMX Phase I', fontsize=20, color='#3c2420');
+#ax.plot(ldmx_hcal_4gev['mass'], ldmx_hcal_4gev['eps2'],
+        #marker='None', linestyle='-', color='#3c2420', lw=4)     ##6d904f
+#ax.text(0.003, 0.0000000001, 'LDMX Phase I', fontsize=20, color='#3c2420');
 
 #ax.plot(ldmx_phase1['mass'], ldmx_phase1['eps2'],
         #marker='None', linestyle='-', color='#e5ae38', lw=4)
@@ -805,13 +809,28 @@ ax.text(0.003, 0.0000000001, 'LDMX Phase I', fontsize=20, color='#3c2420');
         #marker='None', linestyle='-', color='#f19227', lw=4)
 #ax.text(0.1, 0.0000000005, 'LDMX Ecal II', fontsize=20, color='#f19227');
 
-ax.plot(ldmx_hcal_8gev['mass'], ldmx_hcal_8gev['eps2'],
+#ax.plot(ldmx_hcal_8gev['mass'], ldmx_hcal_8gev['eps2'],
+        #marker='None', linestyle='-', color='#a5e538', lw=4)
+#ax.text(0.1, 0.0000000001, 'LDMX Phase II', fontsize=20, color='#a5e538');
+
+
+ax.plot(ldmx_hcal_8gev_0['mass'], ldmx_hcal_8gev_0['eps2'],
         marker='None', linestyle='-', color='#a5e538', lw=4)
-ax.text(0.1, 0.0000000001, 'LDMX Phase II', fontsize=20, color='#a5e538');
+ax.text(0.1, 0.0000000001, 'LDMX 1e14 EoT, 0 bkg', fontsize=20, color='#a5e538');
+
+ax.plot(ldmx_hcal_8gev_5['mass'], ldmx_hcal_8gev_5['eps2'],
+        marker='None', linestyle='-', color='#aa55ee', lw=4)
+ax.text(0.1, 0.00000000012, 'LDMX 1e14 EoT, 5 bkg', fontsize=20, color='#aa55ee');
+
+ax.plot(ldmx_hcal_8gev_10['mass'], ldmx_hcal_8gev_10['eps2'],
+        marker='None', linestyle='-', color='#e92497', lw=4)
+ax.text(0.1, 0.00000000015, 'LDMX 1e14 EoT, 10 bkg', fontsize=20, color='#e92497');
+
+
 
 draw_existing_limits_color(ax)
-ax.set_title("");
+ax.set_title("Minimal Dark Photon");
 #fig.savefig('final_coupling_upper_limits.pdf', facecolor='white')
-fig.savefig('Hcal_only.pdf', facecolor='white')
+fig.savefig('Hcal_only_8GeV_Aug27_2024.pdf', facecolor='white')
 
 #plt.show()

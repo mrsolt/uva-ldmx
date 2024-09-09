@@ -5,11 +5,11 @@ zmin = 50. #cm
 zmax = 500. #cm
 e_zmin = 50. #cm
 e_zmax = 70. #cm
-h_zmin = 77. #cm
+h_zmin = 95. #cm
 h_zmax = 500. #cm
-eot = 1.e16
+eot = 1.e14
 ecal_background = 32        #including intermediate region
-hcal_background = 5       #from Lincoln
+hcal_background = 0.5
 combined_background = 37
 
 #12/2023 --> 26 Ecal/6 intermediate/5 Hcal

@@ -15,16 +15,51 @@ def GammaCTau(E, m, eps):
     return 65. * (E/8.) * pow(1.e-5 / eps, 2) * pow(0.1/m, 2)
 
 
-def MinSignal(b):
-    signal_steps = np.linspace(0, 75, 600, endpoint = False) #this can really be any number/increment, but need upper limit to be high enough to get CDF value to chosen confidence level
+#def MinSignal(b):                     #here b is expected background, set by the user in the params.py file
+#    obs_evt = 0             #number of observed events - since we are doing a confidence of exclusion and assuming we observe zero events in the experiment
+#    confidence_level = 0.9            #want our exclusion at a 90% confidence level, but able to be changed here
 
-    for k in range(len(signal_steps)):
+#    S = 0.0                           #set upper limit of expected signal to start at 0
+
+
+#    print(b)
+
+#    while True:
+#        print(S+b)
+#        cdf = poisson.cdf(obs_evt, S+b)
+#        print(cdf)
+
+        #Check if the CDF has reached (1 - confidence_level) --> 90% exclusion means CDF <= 0.1
+        #if cdf <= (1 - confidence_level):
+#        if cdf <= 0.1:
+#            print(f"The upper limit on expected signal with {confidence_level*100}% confidence of exclusion is {S:.3f}")
+#            break
+#        else:
+#            print(f"The CDF value is not less than or equal to {1-confidence_level:.2f}.")
+
+#        S += 0.0125                   #increment the upper limit of expected signal
+
+#    return S
+
+
+#From Matt Solt, don't believe it is calculating confidence of exclusion
+def MinSignal(b):
+    #signal_steps = np.linspace(0, 75, 600, endpoint = False) #this can really be any number/increment, but need upper limit to be high enough to get CDF value to chosen confidence level
+    print(b)
+
+    k = 0.0
+
+    while True:
         cdf = poisson.cdf(k,b)
-        if (cdf > 0.899):
+        print(k)
+        print(cdf)
+        if (cdf >= 0.90):
             print("The expected signal with at least 90% CL is", k)
             break
-        else:
-            print("Not a high enough confidence level.")
+        #else:
+            #print("Not a high enough confidence level.")
+
+        k += 0.0125
 
     return k
 
