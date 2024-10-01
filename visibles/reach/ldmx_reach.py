@@ -151,9 +151,10 @@ hps_full_lumi = np.genfromtxt('contours/hps_full_lumi.csv', dtype = [('mass', 'f
 #ldmx_phase1 = np.genfromtxt('output_4e+14eot_4gev_50-500cm_37combbkg_55ecaleff_60hcaleff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 #ldmx_phase2 = np.genfromtxt('output_1e+16eot_8gev_50-500cm_37combbkg_55ecaleff_60hcaleff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
-ldmx_hcal_8gev_0 = np.genfromtxt('output_1e+14eot_8gev_95-500cm_0hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-ldmx_hcal_8gev_5 = np.genfromtxt('output_1e+14eot_8gev_95-500cm_5hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
-ldmx_hcal_8gev_10 = np.genfromtxt('output_1e+14eot_8gev_95-500cm_10hcalbkg_60eff_eps2.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal_8gev_half = np.genfromtxt('output_1e+14eot_8gev_95-500cm_0.5hcalbkg_60eff_eps2_90CL.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal_8gev_5 = np.genfromtxt('output_1e+14eot_8gev_95-500cm_5.0hcalbkg_60eff_eps2_90CL.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+ldmx_hcal_8gev_E16eot_half = np.genfromtxt('output_1e+16eot_8gev_95-500cm_0.5hcalbkg_60eff_eps2_90CL.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
+#ldmx_hcal_8gev_E16eot_100eff = np.genfromtxt('output_1e+16eot_8gev_95-500cm_0.5hcalbkg_100eff_eps2_95CL.csv', dtype = [('mass', 'f8'), ('eps2', 'f8')], delimiter=',')
 
 #
 # Vertex projections
@@ -477,7 +478,7 @@ def setup_fig_style(ax):
     ax.set_ylim(0.00000000002, 0.0001) #0.00000000002, 0.0001
     ax.set_xlim(0.002, 1.5)  #0.002, 1.5
     ax.tick_params(axis = 'both', which = 'both', length = 15)
-    ax.set_title('$\\bf{HPS}$ $\\bf{Simulation}$ $\\bf{Preliminary}$', x=.7, y=.01, fontsize=20)
+    ax.set_title('Minimal Dark Photon', fontsize = 20, loc = 'center')
 
     ax.set_yscale('log')
     ax.set_xscale('log')
@@ -506,7 +507,7 @@ def draw_existing_limits_color(ax):
     epsilon_squared = babar['eps']*babar['eps']*math.sqrt(1.64/1.96)*math.sqrt(1.64/1.96)
     ax.fill_between(babar['mass'], epsilon_squared, 0.001,
                     alpha=0.2, facecolor='brown', edgecolor="0.3", linewidth=2)
-    ax.text(0.3, 0.000002, 'BaBar', fontsize=15, color='brown', fontweight='bold')
+    ax.text(0.1, 0.000002, 'BaBar', fontsize=15, color='brown', fontweight='bold')
 
     #
     # LHCb
@@ -554,16 +555,16 @@ def draw_existing_limits_color(ax):
     #ax.text(0.028, 0.00003, 'HPS 2015', fontsize=15, color='blue', fontweight='bold')
 
     ## 2015 + 2016
-    ax.fill_between(engrun20152016['mass']/1000, engrun20152016['epsilon2'], 0.001,
-                    alpha=0.2, facecolor='blue', edgecolor='blue', linewidth=2)
-    ax.text(0.028, 0.00003, 'HPS 2015 and 2016', fontsize=15, color='blue', fontweight='bold')
+    #ax.fill_between(engrun20152016['mass']/1000, engrun20152016['epsilon2'], 0.001,
+                    #alpha=0.2, facecolor='blue', edgecolor='blue', linewidth=2)
+    #ax.text(0.028, 0.00003, 'HPS 2015 and 2016', fontsize=15, color='blue', fontweight='bold')
 
     #
     # APEX Test
     #
-    ax.fill_between(apex_test['mass']/1000, apex_test['eps']*math.sqrt(1.64/1.96), 0.001,
-                    alpha=0.2, facecolor='purple', edgecolor='purple', hatch=hatching, linewidth=2)
-    ax.text(0.15, 0.000004, '  APEX\nTest Run', fontsize=15, color='purple', fontweight='bold')
+    #ax.fill_between(apex_test['mass']/1000, apex_test['eps']*math.sqrt(1.64/1.96), 0.001,
+                    #alpha=0.2, facecolor='purple', edgecolor='purple', hatch=hatching, linewidth=2)
+    #ax.text(0.15, 0.000004, '  APEX\nTest Run', fontsize=15, color='purple', fontweight='bold')
 
     #
     # KLOE
@@ -572,7 +573,7 @@ def draw_existing_limits_color(ax):
     #### 2014
     ax.fill_between(kloe2014['mass']/1000, kloe2014['eps'], 0.001,
                     alpha=0.2, facecolor='orange', edgecolor='orange', linewidth=2)
-    ax.text(0.6, 0.00004, 'KLOE', fontsize=15, color='orange', fontweight='bold')
+    ax.text(0.6, 0.00004, 'KLOE 2014', fontsize=15, color='orange', fontweight='bold')
 
     ####
     ax.fill_between(kloe['mass']/1000, kloe['eps'], 0.001,
@@ -582,35 +583,73 @@ def draw_existing_limits_color(ax):
     #
     # HADES
     #
-    ax.fill_between(hades['mass'], hades['eps'], 0.001,
-                    alpha=0.2, facecolor='dodgerblue', edgecolor='dodgerblue', linewidth=2)
-    ax.text(0.06, 0.000006, 'HADES', fontsize=15, color='dodgerblue', fontweight='bold')
+    #ax.fill_between(hades['mass'], hades['eps'], 0.001,
+                    #alpha=0.2, facecolor='dodgerblue', edgecolor='dodgerblue', linewidth=2)
+    #ax.text(0.06, 0.000006, 'HADES', fontsize=15, color='dodgerblue', fontweight='bold')
 
     #
     # PHENIX
     #
-    ax.fill_between(phenix['mass']/1000, phenix['eps'], 0.001,
-                    alpha=0.2, facecolor='gold', edgecolor='gold', linewidth=2)
-    ax.text(0.05, 0.000004, 'PHENIX', fontsize=15, color='gold', fontweight='bold')
+    #ax.fill_between(phenix['mass']/1000, phenix['eps'], 0.001,
+                    #alpha=0.2, facecolor='gold', edgecolor='gold', linewidth=2)
+    #ax.text(0.05, 0.000004, 'PHENIX', fontsize=15, color='gold', fontweight='bold')
 
     #
     # Mainz
     #
-    ax.fill_between(mainz['mass'], mainz['eps'], 0.001,
-                    alpha=0.2, facecolor='indigo', edgecolor='indigo', linewidth=2)
-    ax.text(0.1, 0.000002, 'Mainz', fontsize=15, color='indigo', fontweight='bold')
+    #ax.fill_between(mainz['mass'], mainz['eps'], 0.001,
+                    #alpha=0.2, facecolor='indigo', edgecolor='indigo', linewidth=2)
+    #ax.text(0.1, 0.000002, 'Mainz', fontsize=15, color='indigo', fontweight='bold')
 
     ##
     ## Beam Dump
     ##
 
     #
-    # FASER
+    # U70
     #
-    ax.fill_between(FASER_dark_photon['mass'], FASER_dark_photon['eps'],
-                    alpha=0.2, facecolor='#06C2AC', edgecolor='#06C2AC', linewidth=2)
-    ax.text(0.025, 0.0000000015, 'FASER', fontsize=15, color='#00FFFF', fontweight='bold') 
+    ax.fill_between(u70_proj['mass'], u70_proj['eps']*u70_proj['eps'], 0.001,
+                    facecolor='#999999', edgecolor='#999999', linewidth=2)
 
+    #
+    # E774
+    #
+    #epsilon_squared = np.power(10, e774['eps'])*np.power(10, e774['eps'])
+    #ax.fill_between(np.power(10, e774['mass']), epsilon_squared, 0.001,
+                    #alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
+    #ax.text(0.0045, 0.000001, 'E774', fontsize=15, color='0.3', fontweight='bold')
+
+    #
+    # E137
+    #
+    #epsilon_squared = np.power(10, e137['eps'])*np.power(10, e137['eps'])
+    #ax.fill_between(np.power(10, e137['mass']), epsilon_squared, 0.001,
+                    #alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
+
+    #
+    # E141
+    #
+    #epsilon_squared = np.power(10, e141['eps'])*np.power(10, e141['eps'])
+    #ax.fill_between(np.power(10, e141['mass']), epsilon_squared, 0.001,
+                    #alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
+    #ax.text(2.5e-3, 1e-8, 'E141', fontsize=15, color='0.3', fontweight='bold')
+
+    #
+    # Orsay
+    #
+    epsilon_squared = np.power(10, orsay['eps'])*np.power(10, orsay['eps'])
+    ax.fill_between(np.power(10, orsay['mass']), epsilon_squared, 0.001,
+                    facecolor='#999999', edgecolor='#999999', linewidth=2)
+
+    #
+    # KEK
+    #
+    ax.fill_between(kek_andreas['mass'], kek_andreas['eps']*kek_andreas['eps'], 0.001,
+                    facecolor='#999999', edgecolor='#999999', linewidth=2)
+    ax.text(2e-3, 2.5e-11, 'KEK/Orsay/U70', fontsize=15, color='0.3', fontweight='bold')
+
+
+    
     #
     # NA64
     #
@@ -618,160 +657,21 @@ def draw_existing_limits_color(ax):
                     alpha=0.2, facecolor='royalblue', edgecolor="royalblue", linewidth=2)
     ax.text(0.015, 0.00000005, 'NA64', fontsize=15, color='royalblue', fontweight='bold')
 
-    #
-    # U70
-    #
-    ax.fill_between(u70_proj['mass'], u70_proj['eps']*u70_proj['eps'], 0.001,
-                    alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
 
     #
-    # E774
+    # FASER
     #
-    epsilon_squared = np.power(10, e774['eps'])*np.power(10, e774['eps'])
-    ax.fill_between(np.power(10, e774['mass']), epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
-    ax.text(0.0045, 0.000001, 'E774', fontsize=15, color='0.3', fontweight='bold')
+    ax.fill_between(FASER_dark_photon['mass'], FASER_dark_photon['eps'],
+                    alpha = 0.3, facecolor = '#00FFFF', edgecolor = 'none')
+    #for some reason, drawing the edge within ax.fill_between creates an extension of the edge at 10^-2 A' mass that is not physical
+    #drawing the edge of the contour manually below fixes this issue
+    ax.plot(FASER_dark_photon['mass'], FASER_dark_photon['eps'], alpha = 0.3, color = '#00FFFF', linewidth = 2)
+    x_temp = [0.009152473, 0.009152473]
+    y_temp = [3.64212793137E-08, 9.6184491442E-11]
+    ax.plot(x_temp, y_temp, alpha = 0.3, color = '#00FFFF', linewidth = 2)
+    ax.text(0.025, 0.0000000015, 'FASER', fontsize=15, color='#06C2AC', fontweight='bold')
 
-    #
-    # E137
-    #
-    epsilon_squared = np.power(10, e137['eps'])*np.power(10, e137['eps'])
-    ax.fill_between(np.power(10, e137['mass']), epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
-
-    #
-    # E141
-    #
-    epsilon_squared = np.power(10, e141['eps'])*np.power(10, e141['eps'])
-    ax.fill_between(np.power(10, e141['mass']), epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
-    ax.text(2.5e-3, 1e-8, 'E141', fontsize=15, color='0.3', fontweight='bold')
-
-    #
-    # Orsay
-    #
-    epsilon_squared = np.power(10, orsay['eps'])*np.power(10, orsay['eps'])
-    ax.fill_between(np.power(10, orsay['mass']), epsilon_squared, 0.001,
-                alpha=0.2, facecolor='0.3', edgecolor="0.3", linewidth=2)
-
-    #
-    # KEK
-    #
-    ax.fill_between(kek_andreas['mass'], kek_andreas['eps']*kek_andreas['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", linewidth=2)
-    ax.text(3e-3, 4e-11, 'Orsay/E137/CHARM/U70', fontsize=15, color='0.3', fontweight='bold')
-
-def draw_existing_limits_grayscale(ax):
-
-    ax.fill_between(amu_2sigma_low['mass'], amu_2sigma_low['eps']*amu_2sigma_low['eps'],
-                amu_2sigma_high['eps']*amu_2sigma_high['eps'], alpha=0.1, color='green')
-
-    ax.fill_between(ae_3sigma['mass'], ae_3sigma['eps']*ae_3sigma['eps'], 0.001,
-                alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    # BaBar
-    epsilon_squared = babar['eps']*babar['eps']*math.sqrt(1.64/1.96)*math.sqrt(1.64/1.96)
-    ax.fill_between(babar['mass'], epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    # NA48/2
-    epsilon_squared = na48['eps']*na48['eps']*math.sqrt(1.64/1.96)*math.sqrt(1.64/1.96)
-    ax.fill_between(na48['mass'], epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    # APEX Test
-    ax.fill_between(apex_test['mass']/1000, apex_test['eps']*math.sqrt(1.64/1.96), 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    ax.fill_between(kloe2014['mass']/1000, kloe2014['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-    #ax.text(0.6, 0.00004, 'KLOE', fontsize=15, color='0.3', fontweight='bold')
-
-    ax.fill_between(kloe['mass']/1000, kloe['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    ax.fill_between(hades['mass'], hades['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3",hatch=hatching, linewidth=2)
-
-    ax.fill_between(phenix['mass']/1000, phenix['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    ax.fill_between(mainz['mass'], mainz['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    ax.fill_between(u70_proj['mass'], u70_proj['eps']*u70_proj['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    epsilon_squared = np.power(10, e774['eps'])*np.power(10, e774['eps'])
-    ax.fill_between(np.power(10, e774['mass']), epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-
-    epsilon_squared = np.power(10, e137['eps'])*np.power(10, e137['eps'])
-    ax.fill_between(np.power(10, e137['mass']), epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    epsilon_squared = np.power(10, e141['eps'])*np.power(10, e141['eps'])
-    ax.fill_between(np.power(10, e141['mass']), epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-
-    ax.fill_between(na64_2019['mass'], na64_2019['eps']*na64_2019['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    epsilon_squared = np.power(10, orsay['eps'])*np.power(10, orsay['eps'])
-    ax.fill_between(np.power(10, orsay['mass']), epsilon_squared, 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-
-    ax.fill_between(kek_andreas['mass'], kek_andreas['eps']*kek_andreas['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    ax.fill_between(lhcb_prompt['mass']/1000, lhcb_prompt['eps'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor="0.3", hatch=hatching, linewidth=2)
-
-    ax.fill_between(lhcb_prompt_2019['mass'], lhcb_prompt_2019['eps']*math.sqrt(1.96/1.64), 0.001,
-                    alpha=0.2, facecolor='none', edgecolor='0.3', hatch=hatching, linewidth=2)
-    ax.text(0.27, 0.0000003, 'LHCb', fontsize=15, color='0.3', fontweight='bold')
-
-    # Long lived
-    ax.fill(lhcb_ll_00_2019['mass']/1000, lhcb_ll_00_2019['eps']*math.sqrt(1.96/1.64),
-                   alpha=0.2, facecolor='none', edgecolor='0.3', hatch=hatching, linewidth=2)
-    ax.fill(lhcb_ll_01_2019['mass']/1000, lhcb_ll_01_2019['eps']*math.sqrt(1.96/1.64),
-                   alpha=0.2, facecolor='none', edgecolor='0.3', hatch=hatching, linewidth=2)
-    ax.text(0.27, 1e-9, 'LHCb', fontsize=15, color='0.3', fontweight='bold')
-
-    ax.fill_between(engrun2015['mass'], engrun2015['epsilon'], 0.001,
-                    alpha=0.2, facecolor='none', edgecolor='0.3', hatch=hatching, linewidth=2)
-
-
-    ax.text(0.009, 0.000003, '$a_{\mu \pm 2 \sigma}$', fontsize=30, color='green', fontweight='bold')
-    ax.text(0.004, 0.00005, '$a_{e}$', fontsize=30, color='0.3', fontweight='bold')
-    ax.text(0.3, 0.000002, 'BaBar', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.02, 0.000001, 'NA48/2', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.1, 0.00004, 'KLOE', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.06, 0.000006, 'HADES', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.15, 0.000004, '  APEX\nTest Run', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.05, 0.000004, 'PHENIX', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.09, 0.000003, 'Mainz', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.003, 0.00000003, 'U70', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.0045, 0.000001, 'E774', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.0022, 0.000000015, 'E137', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.004, 0.0000001, 'E141', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.015, 0.00000005, 'NA64', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.0022, 0.0000001, 'Orsay', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.0022, 0.00000004, 'KEK', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.27, 0.000001, 'LHCb', fontsize=15, color='0.3', fontweight='bold')
-    ax.text(0.028, 0.00003, 'HPS 2015', fontsize=15, color='0.3', fontweight='bold')
-
-
-#fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(12, 12))
-#setup_fig_style(ax)
-
-#ax.text(0.035, 0.00000002, 'LDMX Phase II', fontsize=20, color='#6d904f');
-
-#draw_existing_limits_grayscale(ax);
-#ax.set_title("");
+    
 
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(12, 12))
 setup_fig_style(ax)
@@ -784,6 +684,7 @@ ax.fill_between(t_target_upper['mass'], t_target_upper['eps'], 1e-12,
 ax.fill_between(t_target_lower['mass'], t_target_lower['eps'], 1e-12,
                 alpha=0.9, facecolor='white', edgecolor='red', linewidth=2)
 ax.plot(t_target_upper['mass'], t_target_upper['eps'], linewidth=2, color='red')
+ax.plot(t_target_lower['mass'], t_target_lower['eps'], linewidth=2, color='red')
 ax.text(2.1e-2, 2.5e-11, r"Thermal targets: $\alpha_D = 0.5, M_{A'}/M_{\chi} = 1.5$", color='red',
         rotation=40, fontsize=12)
 
@@ -814,23 +715,26 @@ ax.text(2.1e-2, 2.5e-11, r"Thermal targets: $\alpha_D = 0.5, M_{A'}/M_{\chi} = 1
 #ax.text(0.1, 0.0000000001, 'LDMX Phase II', fontsize=20, color='#a5e538');
 
 
-ax.plot(ldmx_hcal_8gev_0['mass'], ldmx_hcal_8gev_0['eps2'],
-        marker='None', linestyle='-', color='#a5e538', lw=4)
-ax.text(0.1, 0.0000000001, 'LDMX 1e14 EoT, 0 bkg', fontsize=20, color='#a5e538');
+ax.plot(ldmx_hcal_8gev_half['mass'], ldmx_hcal_8gev_half['eps2'],
+        marker='None', linestyle='-', color='#e92497', lw=4)
+ax.text(0.002, 2e-10, 'LDMX: 1e14 EoT, 0.5 bkg', fontsize=18, color='#e92497');
 
 ax.plot(ldmx_hcal_8gev_5['mass'], ldmx_hcal_8gev_5['eps2'],
-        marker='None', linestyle='-', color='#aa55ee', lw=4)
-ax.text(0.1, 0.00000000012, 'LDMX 1e14 EoT, 5 bkg', fontsize=20, color='#aa55ee');
+        marker='None', linestyle='-', color='#6a329f', lw=4)
+ax.text(0.002, 1e-9, 'LDMX: 1e14 EoT, 5 bkg', fontsize=17, color='#6a329f', fontweight = 'bold');
 
-ax.plot(ldmx_hcal_8gev_10['mass'], ldmx_hcal_8gev_10['eps2'],
-        marker='None', linestyle='-', color='#e92497', lw=4)
-ax.text(0.1, 0.00000000015, 'LDMX 1e14 EoT, 10 bkg', fontsize=20, color='#e92497');
+ax.plot(ldmx_hcal_8gev_E16eot_half['mass'], ldmx_hcal_8gev_E16eot_half['eps2'],
+        marker='None', linestyle='-', color='#a5e538', lw=4)
+ax.text(0.002, 5.5e-11, 'LDMX: 1e16 EoT, 0.5 bkg', fontsize=19, color='#a5e538');
+
+#ax.plot(ldmx_hcal_8gev_E16eot_100eff['mass'], ldmx_hcal_8gev_E16eot_100eff['eps2'],
+        #marker='None', linestyle='-', color='#e92497', lw=4)
+#ax.text(0.002, 5.5e-11, 'LDMX: 1e16 EoT, 0.5 bkg, 100% eff', fontsize=19, color='#e92497');
 
 
-
+#draw_old_limits_grayscale(ax)
 draw_existing_limits_color(ax)
-ax.set_title("Minimal Dark Photon");
 #fig.savefig('final_coupling_upper_limits.pdf', facecolor='white')
-fig.savefig('Hcal_only_8GeV_Aug27_2024.pdf', facecolor='white')
+fig.savefig('Hcal_only_8GeV_Oct01_2024_90CL.pdf', facecolor='white')
 
 #plt.show()

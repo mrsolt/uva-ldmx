@@ -14,47 +14,20 @@ def N_sig(Naprime, zmin, zmax, gctau):
 def GammaCTau(E, m, eps):
     return 65. * (E/8.) * pow(1.e-5 / eps, 2) * pow(0.1/m, 2)
 
+######### to calc. the expected signal, using CLs method, which according to Cam (SLAC) means we have to have 95% confidence level ##############
+###############              CL_s(mu) = p_mu/(1-p_b)             #################
 
-#def MinSignal(b):                     #here b is expected background, set by the user in the params.py file
-#    obs_evt = 0             #number of observed events - since we are doing a confidence of exclusion and assuming we observe zero events in the experiment
-#    confidence_level = 0.9            #want our exclusion at a 90% confidence level, but able to be changed here
-
-#    S = 0.0                           #set upper limit of expected signal to start at 0
-
-
-#    print(b)
-
-#    while True:
-#        print(S+b)
-#        cdf = poisson.cdf(obs_evt, S+b)
-#        print(cdf)
-
-        #Check if the CDF has reached (1 - confidence_level) --> 90% exclusion means CDF <= 0.1
-        #if cdf <= (1 - confidence_level):
-#        if cdf <= 0.1:
-#            print(f"The upper limit on expected signal with {confidence_level*100}% confidence of exclusion is {S:.3f}")
-#            break
-#        else:
-#            print(f"The CDF value is not less than or equal to {1-confidence_level:.2f}.")
-
-#        S += 0.0125                   #increment the upper limit of expected signal
-
-#    return S
-
-
-#From Matt Solt, don't believe it is calculating confidence of exclusion
-def MinSignal(b):
-    #signal_steps = np.linspace(0, 75, 600, endpoint = False) #this can really be any number/increment, but need upper limit to be high enough to get CDF value to chosen confidence level
-    print(b)
+#originally written by Matt Solt
+def ExpectedEvents(b):
+    confidence_level = 0.95
 
     k = 0.0
 
     while True:
         cdf = poisson.cdf(k,b)
-        print(k)
         print(cdf)
-        if (cdf >= 0.90):
-            print("The expected signal with at least 90% CL is", k)
+        if (cdf >= confidence_level):
+            print(f"The expected number of observed events with at least {confidence_level*100}% CL is {k:.3f}")
             break
         #else:
             #print("Not a high enough confidence level.")
@@ -62,6 +35,30 @@ def MinSignal(b):
         k += 0.0125
 
     return k
+
+
+def MinSignal(k,b):                    #here b is expected background, set by the user in the params.py file
+    obs_events = k
+    confidence_level = 0.90            #want our exclusion at a 90% confidence level if using CLs, but able to be changed here
+
+    S = 0.0                            #set upper limit of expected signal to start at 0
+
+
+    while True:
+        cdf = poisson.cdf(obs_events, S+b)
+
+        #Check if the CDF has reached (1 - confidence_level) --> 90% exclusion means CDF value (p-value) <= 0.1
+        if cdf <= 0.5*(1 - confidence_level):         #p_b is .5 (50%) because we are using the mean value of our background distribution, cdf "side" is equal to right side of CL_s eqn, not left side! So you have to move the 0.5 in denom to the other side
+            print(cdf)
+            print(f"The upper limit on expected signal with {confidence_level*100}% CL_s is {S:.3f} for {b} background")
+            break
+        #else:
+            #print(f"The CDF value is not less than or equal to {1-confidence_level:.2f}.")
+
+        S += 0.0125                   #increment the upper limit of expected signal
+
+    return S
+
 
 
 #The table here is provided by S. Yellin from arXiv:physics/0203002v2

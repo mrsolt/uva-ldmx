@@ -49,6 +49,7 @@ if(Ecal):
     else:
         outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}ecalbkg_{6:.0f}eff".format(outfile, eot, ebeam, e_zmin, e_zmax, ecal_background, ecal_eff*100)
 
+    #expected_obs_evt = rc.ExpectedEvents(ecal_background)
     minSignal = rc.MinSignal(ecal_background)
 
     if(plotoutput):
@@ -67,10 +68,11 @@ if(Ecal):
 
 elif(Hcal):
     if(eps2):
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}hcalbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, hcal_eff*100)
+        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.1f}hcalbkg_{6:.0f}eff_eps2".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, hcal_eff*100)
     else:
-        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}hcalbkg_{6:.0f}eff".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, hcal_eff*100)
+        outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.1f}hcalbkg_{6:.0f}eff".format(outfile, eot, ebeam, h_zmin, h_zmax, hcal_background, hcal_eff*100)
 
+    #expected_obs_evt = rc.ExpectedEvents(hcal_background)
     minSignal = rc.MinSignal(hcal_background)
 
     if(plotoutput):
@@ -94,6 +96,7 @@ elif(Combined):
     else:
         outbasename = "{0}_{1:.0e}eot_{2:.0f}gev_{3:.0f}-{4:.0f}cm_{5:.0f}combbkg_{6:.0f}ecaleff_{7:.0f}hcaleff".format(outfile, eot, ebeam, zmin, zmax, combined_background, ecal_eff*100, hcal_eff*100)
 
+    #expected_obs_evt = rc.ExpectedEvents(combined_background)
     minSignal = rc.MinSignal(combined_background)
 
     if(plotoutput):
