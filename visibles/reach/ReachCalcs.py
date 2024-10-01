@@ -18,34 +18,33 @@ def GammaCTau(E, m, eps):
 ###############              CL_s(mu) = p_mu/(1-p_b)             #################
 
 #originally written by Matt Solt
-def ExpectedEvents(b):
-    confidence_level = 0.95
+#def ExpectedEvents(b):
+#    confidence_level = 0.95
 
-    k = 0.0
+#    k = 0.0
 
-    while True:
-        cdf = poisson.cdf(k,b)
-        print(cdf)
-        if (cdf >= confidence_level):
-            print(f"The expected number of observed events with at least {confidence_level*100}% CL is {k:.3f}")
-            break
+#    while True:
+#        cdf = poisson.cdf(k,b)
+#        print(cdf)
+#        if (cdf >= confidence_level):
+#            print(f"The expected number of observed events with at least {confidence_level*100}% CL is {k:.3f}")
+#            break
         #else:
             #print("Not a high enough confidence level.")
 
-        k += 0.0125
+#        k += 0.0125
 
-    return k
+#    return k
 
 
-def MinSignal(k,b):                    #here b is expected background, set by the user in the params.py file
-    obs_events = k
+def MinSignal(b):                    #here b is expected background, set by the user in the params.py file
     confidence_level = 0.90            #want our exclusion at a 90% confidence level if using CLs, but able to be changed here
 
     S = 0.0                            #set upper limit of expected signal to start at 0
 
 
     while True:
-        cdf = poisson.cdf(obs_events, S+b)
+        cdf = poisson.cdf(b, S+b)
 
         #Check if the CDF has reached (1 - confidence_level) --> 90% exclusion means CDF value (p-value) <= 0.1
         if cdf <= 0.5*(1 - confidence_level):         #p_b is .5 (50%) because we are using the mean value of our background distribution, cdf "side" is equal to right side of CL_s eqn, not left side! So you have to move the 0.5 in denom to the other side
